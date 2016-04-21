@@ -1,0 +1,44 @@
+.songs {
+  padding: 0.1em 0;
+}
+
+.song {
+  background: #222;
+  border-bottom: 1px solid #333;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.5em 1em;
+  padding: 0.5em 1em;
+}
+
+.song > * {
+  margin-right: 1em;
+}
+
+.song__play {
+  width: 5%;
+  opacity: 0;
+}
+
+.song__title, .song__artist, .song__album {
+  width: 30%;
+}
+
+.song i {
+  color: #ccc;
+}
+
+.song__header{
+  color: #aaa;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.real-song:hover {
+  background: #333;
+  cursor: pointer;
+  .song__play {
+    opacity: 1;
+  }
+}
+

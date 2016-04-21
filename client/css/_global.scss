@@ -1,0 +1,21 @@
+body {
+  background: #222;
+  font-family: "Open Sans";
+  padding-bottom: 5em;
+}
+
+a {
+  color: white;
+  cursor: pointer;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  display: flex;
+  font-size: 1.3em;
+  padding: 1em 1em 0;
+}
+

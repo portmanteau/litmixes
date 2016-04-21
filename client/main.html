@@ -1,25 +1,19 @@
 <head>
   <title>simple</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
-  {{> info}}
+  <div class="litmix">
+    {{>playlist}}
+    <div class="songs">
+      {{>songHeader}}
+      {{>song}}
+      <div class="drop-area" data-js="drop">
+        Add MP3<i aria-hidden="true" class="fa fa-plus"></i>
+      </div>
+    </div>
+  </div>
+  {{>controlBar}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-</template>
-
-<template name="info">
-  <h2>Learn Meteor!</h2>
-  <ul>
-    <li><a href="https://www.meteor.com/try">Do the Tutorial</a></li>
-    <li><a href="http://guide.meteor.com">Follow the Guide</a></li>
-    <li><a href="https://docs.meteor.com">Read the Docs</a></li>
-    <li><a href="https://forums.meteor.com">Discussions</a></li>
-  </ul>
-</template>

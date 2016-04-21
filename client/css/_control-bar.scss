@@ -1,0 +1,26 @@
+.control-bar {
+  background: #222;
+  border-top: 1px solid black;
+  bottom: 0;
+  color: white;
+  font-size: 1.3em;
+  padding: 1em;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  z-index: 10;
+}
+
+.control-bar > i {
+  cursor: pointer;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.control-bar > i:hover {
+  color: #ccc;
+}
+
+.control-bar > .fa-play {
+  border-radius: 100%;
+}
