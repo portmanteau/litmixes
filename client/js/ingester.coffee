@@ -30,9 +30,30 @@
           @_chromeAddItem(entry, path + item.name + "/")
 
   _addFile: (file) ->
-    jsmediatags.read file, onSuccess: @_addSong, onError: ->
-      alert("Not a valid file")
+    jsmediatags.read(
+      file,
+      {
+        onSuccess: (data) =>
+          @_uploadFile(file).then( ->
+            Meteor.call('addSong', data)
+          )
+        onError: ->
+          alert("Not a valid file")
+      }
+    )
 
-  _addSong: (data) ->
-      console.log(data.tags)
-      Meteor.call('addSong', data.tags)
+  _uploadFile: (file) ->
+    return new Promise (resolve, reject) ->
+      bucket = new AWS.S3 params: { }
+      params = {
+        ACL: "public-read",
+        Body: file,
+        Bucket: Meteor.settings.public.bucketName
+        ContentType: file.type,
+        Key: file.name,
+      }
+
+      bucket.putObject params, (err, data) ->
+        console.log(data)
+        resolve()
+

@@ -1,9 +1,9 @@
 Meteor.methods
-  addSong: (data) ->
+  addSong: (data, file) ->
     song =
-      album: data.album
-      artist: data.artist
-      title: data.title
-      year: data.year
+      album: data.tags.album
+      artist: data.tags.artist
+      title: data.tags.title
+      year: data.tags.year
 
     Songs.insert(song)
