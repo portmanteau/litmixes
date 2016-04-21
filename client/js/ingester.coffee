@@ -5,18 +5,34 @@
   chromeIngest: (event) ->
     items = event.originalEvent.dataTransfer.items
 
-    j = 0
-    while j < items.length
-      item = items[j].webkitGetAsEntry()
+    for item in items
+      item = item.webkitGetAsEntry()
       if item
-        console.log(item)
-      j++
+        @_chromeAddItem(item)
 
   ingest: (event) ->
-    # Other browser users have to upload files directly
     files = event.originalEvent.dataTransfer.files
 
-    j = 0
-    while j < files.length
-      if files[j].type.match(/audio\/(mp3|mpeg)/)
-        console.log(files[j])
+    for file in files
+      @_addFile(file)
+
+  _chromeAddItem: (item, path) ->
+    path = path || ""
+
+    if item.isFile
+      item.file (file) =>
+        @_addFile(file)
+
+    else if item.isDirectory
+      dirReader = item.createReader()
+      dirReader.readEntries (entries) ->
+        for entry in entries
+          @_chromeAddItem(entry, path + item.name + "/")
+
+  _addFile: (file) ->
+    jsmediatags.read file, onSuccess: @_addSong, onError: ->
+      alert("Not a valid file")
+
+  _addSong: (data) ->
+      console.log(data.tags)
+      Meteor.call('addSong', data.tags)
