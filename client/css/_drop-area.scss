@@ -1,0 +1,23 @@
+.drop-area {
+  background: #222;
+  padding: 0.5em 1em;
+}
+
+.drop-area {
+  padding: 1em;
+  text-align: center;
+}
+
+.drop-area:hover {
+  background: #333;
+  cursor: pointer;
+}
+
+.drop-area i {
+  margin-left: 1em;
+}
+
+.drop-area.dragover {
+  background: white;
+  color: black;
+}
