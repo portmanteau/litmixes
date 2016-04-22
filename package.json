@@ -2,7 +2,8 @@
   "name": "litmix",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor --settings settings.json",
+    "push-config": "heroku config:set METEOR_SETTINGS=\"$(cat settings.production.json)\""
   },
   "dependencies": {
     "meteor-node-stubs": "^0.2.3"
