@@ -6,6 +6,7 @@
     "push-config": "heroku config:set METEOR_SETTINGS=\"$(cat settings.production.json)\""
   },
   "dependencies": {
+    "jsmediatags": "^3.0.5",
     "meteor-node-stubs": "^0.2.3"
   }
 }
