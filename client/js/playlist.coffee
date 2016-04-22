@@ -11,8 +11,8 @@ class Playlist
     @audio.src = url
     @play()
 
-    $('.song--playing').removeClass('song--playing')
-    $(target).addClass('song--playing')
+    $('.song').removeClass('song--playing')
+    @_$songElementFor(target).addClass('song--playing')
 
   play: ->
     @audio.play()
@@ -21,6 +21,10 @@ class Playlist
   pause: ->
     @audio.pause()
     $('body').removeClass('playing')
+    $('.song').removeClass('song--playing')
+
+  _$songElementFor: (target) ->
+    $(target).parents('.song')
 
 $ ->
   exports.playlist = new Playlist()
