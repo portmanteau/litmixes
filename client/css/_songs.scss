@@ -9,7 +9,16 @@
   display: flex;
   justify-content: flex-start;
   padding: 0.5em 1em;
-  padding: 0.5em 1em;
+
+  .fa-volume-up {
+    display: none;
+  }
+
+  &.song--playing {
+    .fa-volume-up {
+      display: block;
+    }
+  }
 }
 
 .song > * {
@@ -19,12 +28,8 @@
 .song__play {
   width: 5%;
 
-  .fa {
-    opacity: 0;
-  }
-
-  .fa.song--playing {
-    opacity: 1;
+  .fa-play {
+    display: none;
   }
 }
 
@@ -46,8 +51,15 @@
   background: #333;
   cursor: pointer;
 
-  .song__play .fa {
-    opacity: 1;
+  &.song--playing .song__play .fa-play {
+    display: none;
+  }
+
+  .song__play .fa-play {
+    display: block;
   }
 }
 
+.song--playing .song__play .fa-play {
+  display: none;
+}
