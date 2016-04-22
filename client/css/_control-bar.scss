@@ -21,6 +21,16 @@
   color: #ccc;
 }
 
-.control-bar > .fa-play {
-  border-radius: 100%;
+.control-bar .fa-pause {
+  display: none;
+}
+
+.playing .control-bar {
+  .fa-pause {
+    display: inline-block;
+  }
+
+  .fa-play {
+    display: none;
+  }
 }
