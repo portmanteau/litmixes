@@ -3,6 +3,7 @@
 }
 
 .song {
+  align-items: center;
   background: #222;
   border-bottom: 1px solid #333;
   display: flex;
@@ -17,7 +18,14 @@
 
 .song__play {
   width: 5%;
-  opacity: 0;
+
+  .fa {
+    opacity: 0;
+  }
+
+  .fa.song--playing {
+    opacity: 1;
+  }
 }
 
 .song__title, .song__artist, .song__album {
@@ -37,7 +45,8 @@
 .real-song:hover {
   background: #333;
   cursor: pointer;
-  .song__play {
+
+  .song__play .fa {
     opacity: 1;
   }
 }
