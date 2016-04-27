@@ -45,13 +45,17 @@
   _uploadFile: (file) ->
     return new Promise (resolve, reject) ->
       bucket = new AWS.S3
+      file_path = Router.current().data().mix.slug + "/" + file.name
+
       params = {
         ACL: "public-read",
-        Body: Router.current().data().mix.slug + "/" + file,
+        Body: file
         Bucket: Meteor.settings.public.bucketName
         ContentType: file.type,
         Key: file.name,
       }
+
+      debugger
 
       bucket.putObject params, (err, data) ->
         if err
