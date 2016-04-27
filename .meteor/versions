@@ -45,7 +45,6 @@ iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
 jquery@1.11.8
-kadira:blaze-layout@2.3.0
 launch-screen@1.0.11
 livedata@1.0.18
 localstorage@1.0.9

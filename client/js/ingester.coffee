@@ -34,9 +34,8 @@
       file,
       {
         onSuccess: (data) =>
-          @_uploadFile(file).then( ->
-            Meteor.call('addSong', data, file.name, Router.current().data().mix.slug)
-          )
+          @_uploadFile(file).then (file_path) ->
+            Meteor.call('addSong', data, file_path, Router.current().data().mix.slug)
         onError: ->
           alert("Not a valid file")
       }
@@ -49,17 +48,19 @@
 
       params = {
         ACL: "public-read",
-        Body: file
-        Bucket: Meteor.settings.public.bucketName
+        Body: file,
+        Bucket: Meteor.settings.public.bucketName,
         ContentType: file.type,
-        Key: file.name,
+        Key: file_path,
       }
 
-      debugger
-
-      bucket.putObject params, (err, data) ->
-        if err
-          throw new Error err
-        else 
-          resolve()
+      bucket.upload(params).
+        on('httpUploadProgress', (event) ->
+          console.log(event.loaded / event.total)
+        ).
+        send (err, data) ->
+          if err
+            throw new Error err
+          else 
+            resolve(file_path)
 

@@ -22,6 +22,5 @@ fourseven:scss
 fortawesome:fontawesome
 coffeescript
 peerlibrary:aws-sdk
-kadira:blaze-layout
 meteorhacks:fast-render
 iron:router
