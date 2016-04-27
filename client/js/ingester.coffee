@@ -35,7 +35,7 @@
       {
         onSuccess: (data) =>
           @_uploadFile(file).then( ->
-            Meteor.call('addSong', data, file.name)
+            Meteor.call('addSong', data, file.name, Router.current().data().mix.slug)
           )
         onError: ->
           alert("Not a valid file")
@@ -47,12 +47,15 @@
       bucket = new AWS.S3
       params = {
         ACL: "public-read",
-        Body: file,
+        Body: Router.current().data().mix.slug + "/" + file,
         Bucket: Meteor.settings.public.bucketName
         ContentType: file.type,
         Key: file.name,
       }
 
       bucket.putObject params, (err, data) ->
-        resolve()
+        if err
+          throw new Error err
+        else 
+          resolve()
 

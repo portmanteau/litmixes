@@ -1,4 +1,4 @@
-class Droppable
+class @Droppable
   @initialize: (selector) ->
     $(selector).each ->
       new Droppable(this)
@@ -22,6 +22,3 @@ class Droppable
       Ingester.chromeIngest(event)
     else
       Ingester.ingest(event)
-
-$ ->
-  Droppable.initialize('[data-js="drop"]')
