@@ -1,6 +1,4 @@
-exports = this
-
-class Playlist
+class @Playlist
   constructor: ->
     @audio = $('audio')[0]
 
@@ -25,6 +23,3 @@ class Playlist
 
   _$songElementFor: (target) ->
     $(target).parents('.song')
-
-$ ->
-  exports.playlist = new Playlist()

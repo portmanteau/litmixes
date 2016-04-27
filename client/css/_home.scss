@@ -1,0 +1,8 @@
+.home {
+  font-size: 2em;
+  text-align:center;
+
+  & h1, & form > div {
+    margin-top: 2em;
+  }
+}

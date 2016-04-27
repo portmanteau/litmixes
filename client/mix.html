@@ -1,0 +1,17 @@
+<template name="mix">
+  <div class="litmix">
+    <!-- {{>playlist}} -->
+    <div class="songs">
+      {{>songHeader}}
+
+      {{#each songs}}
+        {{>song}}
+      {{/each}}
+
+      <div class="drop-area" data-js="drop">
+        Drop MP3<i aria-hidden="true" class="fa fa-plus"></i>
+      </div>
+    </div>
+  </div>
+  {{>controlBar}}
+</template>
