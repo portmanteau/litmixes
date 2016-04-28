@@ -34,8 +34,8 @@
       file,
       {
         onSuccess: (data) =>
-          @_uploadFile(file).then (file_path) ->
-            Meteor.call('addSong', data, file_path, Router.current().data().mix.slug)
+          @_uploadFile(file).then (url) ->
+            Meteor.call('addSong', data, url, Router.current().data().mix.slug)
         onError: ->
           alert("Not a valid file")
       }
@@ -43,24 +43,13 @@
 
   _uploadFile: (file) ->
     return new Promise (resolve, reject) ->
-      bucket = new AWS.S3
-      file_path = Router.current().data().mix.slug + "/" + file.name
+      context = { slug: Router.current().data().mix.slug }
+      uploader = new Slingshot.Upload("userUpload", context)
 
-      params = {
-        ACL: "public-read",
-        Body: file,
-        Bucket: Meteor.settings.public.bucketName,
-        ContentType: file.type,
-        Key: file_path,
-      }
-
-      bucket.upload(params).
-        on('httpUploadProgress', (event) ->
-          console.log(event.loaded / event.total)
-        ).
-        send (err, data) ->
-          if err
-            throw new Error err
-          else 
-            resolve(file_path)
+      uploader.send file, (error, downloadUrl) ->
+        if error
+          console.error(error)
+          alert(error)
+        else 
+          resolve(downloadUrl)
 

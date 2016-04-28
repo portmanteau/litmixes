@@ -24,3 +24,4 @@ coffeescript
 peerlibrary:aws-sdk
 meteorhacks:fast-render
 iron:router
+edgee:slingshot
