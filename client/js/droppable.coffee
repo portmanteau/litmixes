@@ -18,7 +18,6 @@ class @Droppable
     @$el.on 'drop', @onDrop
 
   onDrop: (event) ->
-    debugger
     if Ingester.isChrome(event)
       Ingester.chromeIngest(event)
     else

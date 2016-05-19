@@ -11,7 +11,6 @@
         @_chromeAddItem(item)
 
   ingest: (event) ->
-    debugger
     files = event.originalEvent.dataTransfer.files
 
     for file in files
