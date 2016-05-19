@@ -10,3 +10,15 @@ Meteor.methods
       slug: slug
 
     Songs.insert(song)
+  deleteMp3: (song) ->
+    unless song.fileName
+      song.fileName = song.url.split('/').slice(-1)[0]
+
+    console.log("DELETING: " + song.fileName)
+
+    if Meteor.isServer
+      s3 = new AWS.S3()
+
+      s3.deleteObjectSync
+        Bucket: Meteor.settings.bucketName
+        Key: song.slug + "/" + song.fileName
