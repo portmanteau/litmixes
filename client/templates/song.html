@@ -5,7 +5,11 @@
       <i aria-hidden="true" class="fa fa-volume-up"></i>
     </div>
     <div class="song__title">
-      {{title}}
+      {{#if title}}
+        {{title}}
+      {{else}}
+        {{fileName}}
+      {{/if}}
     </div>
     <div class="song__artist">
       <a>{{artist}}</a>

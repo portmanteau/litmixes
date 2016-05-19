@@ -3,6 +3,7 @@ Meteor.methods
     song =
       album: data.tags.album
       artist: data.tags.artist
+      fileName: data.fileName
       title: data.tags.title
       year: data.tags.year
       url: url
