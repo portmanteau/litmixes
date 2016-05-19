@@ -6,9 +6,21 @@
 @import "control-bar";
 @import "global";
 
+* {
+  box-sizing: border-box;
+}
+
 .litmix {
   background: #222;
   color: white;
+  min-height: 100vh;
+  padding-bottom: 5em;
+  transition: border-color 1s;
+  border: 3px solid transparent;
+
+  &.dragover {
+    border-color: violet;
+  }
 }
 
 [draggable] {
