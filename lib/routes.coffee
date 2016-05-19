@@ -1,4 +1,4 @@
-exports = this 
+exports = this
 
 Router.configure
   layoutTemplate: "main"
@@ -29,5 +29,5 @@ Router.route "/:slug",
 
   onAfterAction: ->
     if this.ready()
-      Droppable.initialize('[data-js="drop"]')
+      Droppable.initialize('[data-js=drop]')
       exports.playlist = new Playlist()
