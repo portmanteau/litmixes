@@ -29,4 +29,8 @@ class @Droppable
 
       unless movedSongId == songId
         if songId
-          Meteor.call('insertSongAfter', movedSongId, songId)
+          Meteor.call('orderSongAfter', movedSongId, songId)
+        else if this.dataset.destination == 'top'
+          Meteor.call('orderSongTop', movedSongId)
+        else if this.dataset.destination == 'bottom'
+          Meteor.call('orderSongBottom', movedSongId)

@@ -1,3 +1,20 @@
+getOrderForSong = (songId) ->
+  slug = Songs.findOne({_id: songId}).slug
+
+  # get order
+  Songs.find({slug: slug}, {sort: {order: 1}}).map (song) ->
+    song._id
+
+setOrder = (order) ->
+  order.forEach (id, index) ->
+    console.log "setting #{id} to #{index}"
+
+    if Meteor.isClient
+      $(".song[data-id='#{id}'").css 'order', index
+
+    Songs.update { _id: id}, {$set: {order: index}}, ->
+      console.log('updating')
+
 Meteor.methods
   addSong: (data, url, slug) ->
     song =
@@ -9,7 +26,11 @@ Meteor.methods
       url: url
       slug: slug
 
-    Songs.upsert song, song
+    Songs.upsert song, song, ->
+      songId = arguments[1].insertedId
+
+      if !!songId
+        Meteor.call('orderSongBottom', songId)
 
   deleteMp3: (song) ->
     unless song.fileName
@@ -24,28 +45,33 @@ Meteor.methods
         Bucket: Meteor.settings.bucketName
         Key: song.slug + "/" + song.fileName
 
-  insertSongAfter: (movedSongId, songId) ->
-    slug = Songs.findOne({_id: songId}).slug
+  orderSongTop: (songId) ->
+    order = getOrderForSong(songId)
 
-    # Add space
-    order = Songs.find({slug: slug}, {sort: {order: 1}}).map (song) ->
-      song._id
+    if order.indexOf(songId)
+      order.splice(order.indexOf(songId), 1)
 
-    console.log("original order:" + order)
-    # remove moved song
+    order.unshift songId
+
+    setOrder(order)
+
+  orderSongBottom: (songId) ->
+    order = getOrderForSong(songId)
+
+    if order.indexOf(songId)
+      order.splice(order.indexOf(songId), 1)
+
+    order.push songId
+
+    setOrder(order)
+
+  orderSongAfter: (movedSongId, songId) ->
+    order = getOrderForSong(songId)
+
+    # move song
     order.splice(order.indexOf(movedSongId), 1)
 
-    # add it at the correct index
     order.splice(order.indexOf(songId) + 1, 0, movedSongId)
 
-    console.log("final order: " + order)
-
-    # set thing to stuff do
-    order.forEach (id, index) ->
-      console.log "setting #{id} to #{index}"
-
-      if Meteor.isClient
-        $(".song[data-id=#{id}").css 'order', index
-
-      Songs.update { _id: id}, {$set: {order: index}}, ->
-        console.log('updating')
+    # set order
+    setOrder(order)
