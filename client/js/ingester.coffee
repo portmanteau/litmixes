@@ -1,6 +1,6 @@
 @Ingester =
   isFile: (event) ->
-    event.originalEvent.dataTransfer.files.length > 0
+    event.originalEvent.dataTransfer.files
 
   isChrome: (event) ->
     event.originalEvent.dataTransfer.items
