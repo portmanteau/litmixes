@@ -4,9 +4,11 @@
     <div class="songs">
       {{>songHeader}}
 
-      {{#each songs}}
-        {{>song}}
-      {{/each}}
+      <div class="song-items">
+        {{#each songs}}
+          {{>song}}
+        {{/each}}
+      </div>
 
       <div class="drop-area" data-js="drop">
         Drop MP3<i aria-hidden="true" class="fa fa-plus"></i>

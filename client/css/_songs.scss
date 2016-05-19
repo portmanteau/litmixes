@@ -2,6 +2,11 @@
   padding: 0.1em 0;
 }
 
+.song-items {
+  display: flex;
+  flex-direction: column;
+}
+
 .song {
   align-items: center;
   background: #222;

@@ -1,4 +1,5 @@
-onRender = ->
+onRendered = ->
   new Droppable(this.firstNode)
+  new Draggable(this.firstNode)
 
-Template.song.onRendered onRender
+Template.song.onRendered onRendered

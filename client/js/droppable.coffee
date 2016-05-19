@@ -5,6 +5,7 @@ class @Droppable
 
   constructor: (element) ->
     @$el = $(element)
+
     @$el.on 'drop dragover dragleave', (event) ->
       event.preventDefault()
       event.stopPropagation()
@@ -22,3 +23,10 @@ class @Droppable
       Ingester.ingest(event)
     else
       console.log('song')
+      dataTransfer = event.originalEvent.dataTransfer
+      movedSongId = dataTransfer.getData('id')
+      songId = this.dataset.id
+
+      unless movedSongId == songId
+        if songId
+          Meteor.call('insertSongAfter', movedSongId, songId)
