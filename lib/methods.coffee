@@ -9,7 +9,8 @@ Meteor.methods
       url: url
       slug: slug
 
-    Songs.insert(song)
+    Songs.upsert(song, song)
+
   deleteMp3: (song) ->
     unless song.fileName
       song.fileName = song.url.split('/').slice(-1)[0]
