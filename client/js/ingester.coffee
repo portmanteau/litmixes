@@ -1,6 +1,9 @@
 @Ingester =
+  isFile: (event) ->
+    @isChrome(event) || event.originalEvent.dataTransfer.files.length > 0
+
   isChrome: (event) ->
-    event.originalEvent.dataTransfer.items
+    event.originalEvent.dataTransfer.items.length
 
   chromeIngest: (event) ->
     items = event.originalEvent.dataTransfer.items
@@ -11,6 +14,10 @@
         @_chromeAddItem(item)
 
   ingest: (event) ->
+    if @isChrome event
+      @chromeIngest event
+      return
+
     files = event.originalEvent.dataTransfer.files
 
     for file in files

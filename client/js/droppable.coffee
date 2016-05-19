@@ -18,7 +18,7 @@ class @Droppable
     @$el.on 'drop', @onDrop
 
   onDrop: (event) ->
-    if Ingester.isChrome(event)
-      Ingester.chromeIngest(event)
-    else
+    if Ingester.isFile(event)
       Ingester.ingest(event)
+    else
+      console.log('song')
