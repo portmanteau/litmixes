@@ -50,7 +50,7 @@
         if error
           console.error(error)
           alert(error)
-        else 
+        else
           resolve(downloadUrl)
 
       Deps.autorun =>
