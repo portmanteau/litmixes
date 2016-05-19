@@ -60,6 +60,10 @@
   }
 }
 
+.song.dragover {
+  border-color: violet;
+}
+
 .song--playing .song__play .fa-play {
   display: none;
 }
