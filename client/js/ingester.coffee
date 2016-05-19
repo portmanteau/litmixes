@@ -35,8 +35,7 @@
       {
         onSuccess: (data) =>
           @_uploadFile(file).then (url) ->
-            unless data.tags.title
-              data.tags.title = file.name
+            data.fileName = file.name
             Meteor.call('addSong', data, url, Router.current().data().mix.slug)
         onError: ->
           alert("Not a valid file")

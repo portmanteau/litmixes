@@ -63,3 +63,13 @@
 .song--playing .song__play .fa-play {
   display: none;
 }
+
+.song__actions {
+  & > * {
+    opacity: 0;
+  }
+
+  .real-song:hover & > * {
+    opacity: 1;
+  }
+}
