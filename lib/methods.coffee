@@ -1,3 +1,20 @@
+getOrderForSong = (songId) ->
+  slug = Songs.findOne({_id: songId}).slug
+
+  # get order
+  Songs.find({slug: slug}, {sort: {order: 1}}).map (song) ->
+    song._id
+
+setOrder = (order) ->
+  order.forEach (id, index) ->
+    console.log "setting #{id} to #{index}"
+
+    if Meteor.isClient
+      $(".song[data-id='#{id}'").css 'order', index
+
+    Songs.update { _id: id}, {$set: {order: index}}, ->
+      console.log('updating')
+
 Meteor.methods
   addSong: (data, url, slug) ->
     song =
@@ -9,7 +26,11 @@ Meteor.methods
       url: url
       slug: slug
 
-    Songs.upsert(song, song)
+    Songs.upsert song, song, ->
+      songId = arguments[1].insertedId
+
+      if !!songId
+        Meteor.call('orderSongBottom', songId)
 
   deleteMp3: (song) ->
     unless song.fileName
@@ -23,3 +44,34 @@ Meteor.methods
       s3.deleteObjectSync
         Bucket: Meteor.settings.bucketName
         Key: song.slug + "/" + song.fileName
+
+  orderSongTop: (songId) ->
+    order = getOrderForSong(songId)
+
+    if order.indexOf(songId)
+      order.splice(order.indexOf(songId), 1)
+
+    order.unshift songId
+
+    setOrder(order)
+
+  orderSongBottom: (songId) ->
+    order = getOrderForSong(songId)
+
+    if order.indexOf(songId)
+      order.splice(order.indexOf(songId), 1)
+
+    order.push songId
+
+    setOrder(order)
+
+  orderSongAfter: (movedSongId, songId) ->
+    order = getOrderForSong(songId)
+
+    # move song
+    order.splice(order.indexOf(movedSongId), 1)
+
+    order.splice(order.indexOf(songId) + 1, 0, movedSongId)
+
+    # set order
+    setOrder(order)
