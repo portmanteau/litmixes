@@ -40,6 +40,9 @@
 
 .song__title, .song__artist, .song__album {
   width: 30%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .song i {

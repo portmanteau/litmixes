@@ -1,6 +1,9 @@
 Template.song.events
   'click .song__play': (event) ->
-    playlist.load(this.url, event.target)
+    $song = $(event.target).parents('.song')
+    index = $song.data('order')
+
+    playlist.load(index)
 
   'click .song__remove': (event) ->
     title = this.title || this.fileName
