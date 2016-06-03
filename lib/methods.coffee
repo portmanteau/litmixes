@@ -75,3 +75,18 @@ Meteor.methods
 
     # set order
     setOrder(order)
+
+  searchVideo: (search) ->
+    if Meteor.isServer
+      Future = Npm.require('fibers/future')
+      myFuture = new Future()
+
+      YoutubeApi.search.list
+        part: "id",
+        type: "video",
+        maxResults: 5,
+        q: search,
+      , (err, data) ->
+        myFuture.return(data)
+
+      myFuture.wait()

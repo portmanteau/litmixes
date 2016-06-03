@@ -1,0 +1,12 @@
+.mix__add-song-prompt {
+  padding: 0 0.5em;
+  overflow: hidden;
+  transition: transform 0.5s;
+  transform: rotateX(90deg);
+  // transform-origin: 0% 100%;
+
+  .add-song-open & {
+    transform: rotateX(0deg);
+  }
+}
+

@@ -1,10 +1,11 @@
 @import "normalize";
+@import "global";
+@import "control-bar";
+@import "drop-area";
 @import "home";
 @import "playlist";
 @import "songs";
-@import "drop-area";
-@import "control-bar";
-@import "global";
+@import "mix";
 
 * {
   box-sizing: border-box;
