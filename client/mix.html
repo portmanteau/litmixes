@@ -15,7 +15,25 @@
       </div>
       <div class="mix__add-song-prompt">
         <input type="text" placeholder="Song name" value="{{search}}">
-        <div>{{search}}</div>
+        <div class="mix__results">
+          {{#each searchResults}}
+            <div class="youtube-item" data-id="{{ id.videoId }}">
+              <div class="youtube-item__thumbnail">
+                <img src="{{ snippet.thumbnails.default.url }}"/>
+              </div>
+              <div class="youtube-item__description">
+                <div class="youtube-item__title">
+                  {{ snippet.title }}
+                </div>
+                <div class="youtube-item__actions">
+                  <a class="youtube-item__actions__add">
+                    Add <i class="fa fa-plus"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
       </div>
     </div>
 

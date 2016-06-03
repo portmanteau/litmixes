@@ -82,11 +82,12 @@ Meteor.methods
       myFuture = new Future()
 
       YoutubeApi.search.list
-        part: "id",
+        part: "snippet",
         type: "video",
         maxResults: 5,
         q: search,
       , (err, data) ->
+        console.log(err, data)
         myFuture.return(data)
 
       myFuture.wait()
