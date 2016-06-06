@@ -1,23 +1,23 @@
-.drop-area {
+.add-song {
   background: #222;
   padding: 0.5em 1em;
 }
 
-.drop-area {
+.add-song {
   padding: 1em;
   text-align: center;
 }
 
-.drop-area:hover {
+.add-song:hover {
   background: #333;
   cursor: pointer;
 }
 
-.drop-area i {
+.add-song i {
   margin-left: 1em;
 }
 
-.drop-area.dragover {
+.add-song.dragover {
   background: white;
   color: black;
 }

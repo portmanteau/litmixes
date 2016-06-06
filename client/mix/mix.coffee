@@ -24,3 +24,40 @@ Template.mix.events
       search = template.search
       search.set('query', value)
     , 500
+
+  'click .add-song': (event) ->
+    $prompt = $('.mix__add-song-prompt')
+
+    if $('body').hasClass('add-song-open')
+      $prompt.one 'transitionend', ->
+        $prompt.css('display', 'none')
+    else
+      $prompt.css('display', 'block')
+
+    setTimeout ->
+      $('body').toggleClass('add-song-open')
+
+   'click .youtube-item__actions__add': (event, template) ->
+     videoId = this.id.videoId
+     title = this.snippet.title
+     slug = template.data.mix.slug
+
+     Meteor.call('uploadVideo', this.id.videoId, title, slug, (err, resp) ->
+       console.log(arguments)
+
+       if err
+         return
+
+       data =
+         tags:
+           title: title
+
+       # ?? I have no idea why it's sometimes key and sometimes Key
+       if resp.key
+         data.fileName = resp.key.split('/')[1]
+       else
+         data.fileName = resp.Key.split('/')[1]
+
+       Meteor.call('addSong', data, resp.Location, slug)
+     )
+

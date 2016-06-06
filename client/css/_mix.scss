@@ -1,5 +1,6 @@
 .mix__add-song-prompt {
   -webkit-filter: blur(20px);
+  display: none;
   margin-top: 0.5em;
   opacity: 0;
   overflow: hidden;
@@ -27,6 +28,7 @@
 
 .youtube-item__description {
   padding: 0.5em;
+  padding-bottom: 2em;
   color: #ccc;
   position: relative;
   width: 100%;
