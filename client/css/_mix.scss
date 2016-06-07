@@ -1,5 +1,5 @@
 .mix__add-song-prompt {
-  -webkit-filter: blur(20px);
+  // -webkit-filter: blur(20px);
   display: none;
   margin-top: 0.5em;
   opacity: 0;
@@ -11,7 +11,7 @@
 
   .add-song-open & {
     transform: rotateX(0deg);
-    -webkit-filter: blur(0px);
+    // -webkit-filter: blur(0px);
     opacity: 1;
   }
 }

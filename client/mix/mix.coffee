@@ -36,6 +36,7 @@ Template.mix.events
 
     setTimeout ->
       $('body').toggleClass('add-song-open')
+    , 10
 
    'click .youtube-item__actions__add': (event, template) ->
      videoId = this.id.videoId
