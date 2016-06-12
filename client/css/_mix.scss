@@ -1,0 +1,41 @@
+.mix__add-song-prompt {
+  // -webkit-filter: blur(20px);
+  display: none;
+  margin-top: 0.5em;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0 0.5em;
+  transform-origin: 0% 0%;
+  transform: rotateX(90deg);
+  transition: all 0.2s;
+
+  .add-song-open & {
+    transform: rotateX(0deg);
+    // -webkit-filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+.youtube-item {
+  padding: 1em;
+  border-bottom: 1px solid #333;
+  display: flex;
+}
+
+.youtube-item__thumbnail {
+  margin-right: 0.5em;
+}
+
+.youtube-item__description {
+  padding: 0.5em;
+  padding-bottom: 2em;
+  color: #ccc;
+  position: relative;
+  width: 100%;
+}
+
+.youtube-item__actions {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}

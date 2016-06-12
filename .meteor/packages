@@ -26,3 +26,5 @@ meteorhacks:fast-render
 iron:router
 edgee:slingshot
 matb33:collection-hooks
+renaldo:youtube-api
+reactive-dict

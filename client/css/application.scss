@@ -1,13 +1,15 @@
 @import "normalize";
+@import "global";
+@import "control-bar";
+@import "add-song";
 @import "home";
 @import "playlist";
 @import "songs";
-@import "drop-area";
-@import "control-bar";
-@import "global";
+@import "mix";
 
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
 }
 
 .litmix {

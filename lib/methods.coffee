@@ -75,3 +75,48 @@ Meteor.methods
 
     # set order
     setOrder(order)
+
+  searchVideo: (search) ->
+    if Meteor.isServer
+      Future = Npm.require('fibers/future')
+      myFuture = new Future()
+
+      YoutubeApi.search.list
+        part: "snippet",
+        type: "video",
+        maxResults: 5,
+        q: search,
+      , (err, data) ->
+        console.log(err, data)
+        myFuture.return(data)
+
+      myFuture.wait()
+
+  uploadVideo: (videoId, title, slug) ->
+    if Meteor.isServer
+      ytdl = Npm.require('ytdl-core')
+      Future = Npm.require('fibers/future')
+
+      stream = ytdl(
+        "http://www.youtube.com/watch?v=#{videoId}",
+        filter: 'audioonly'
+      )
+
+      future = new Future()
+
+      upload = new AWS.S3.ManagedUpload
+        params:
+          ACL: "public-read"
+          Bucket: Meteor.settings.bucketName
+          Key: slug + "/" + title + ".mp4"
+          Body: stream
+
+      upload.send (err, data) ->
+        if err
+          console.error err
+        else
+          console.log data
+
+        future.return(data)
+
+      future.wait()
