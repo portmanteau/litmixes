@@ -1,3 +1,19 @@
+header.main-header {
+  display: block;
+  padding-bottom: 0.5em;
+
+  button#play-mix {
+    background: #55A32A;
+    color: white;
+    border-radius: 1em;
+    font-size: 0.8em;
+    padding-left: 1em;
+    padding-right: 1em;
+    border: none;
+    float: right;
+  }
+}
+
 .backdrop {
   color: black;
   font-size: 28vw;

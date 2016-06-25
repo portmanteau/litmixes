@@ -1,9 +1,10 @@
 <template name="mix">
   <div class="backdrop">Drop<br/>MP3</div>
   <div class="litmix" data-js="drop">
-    <header>
+    <header class="main-header">
       <a href="http://litmix.es">litmix.es/</a>
       <a href="http://litmix.es/{{mix.slug}}">{{mix.slug}}</a>
+      <button id="play-mix" onclick="playlist.load(0)">Play Mix</button>
     </header>
     <!-- {{>playlist}} -->
     <div class="songs">
