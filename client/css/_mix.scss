@@ -11,6 +11,14 @@ header.main-header {
     padding-right: 1em;
     border: none;
     float: right;
+
+    @media screen and (max-width: 660px) {
+      float: none;
+      display: block;
+      margin: auto;
+      margin-top: 1em;
+      padding: 0.5em 1em;
+    }
   }
 }
 
