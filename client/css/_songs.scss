@@ -10,6 +10,7 @@
 .song {
   align-items: center;
   border-bottom: 1px solid #333;
+  border-top: 1px solid #333;
   display: flex;
   justify-content: flex-start;
   padding: 0.5em 1em;
@@ -62,11 +63,19 @@
   }
 }
 
+.song__artist, .song__album {
+  a {
+    color: #999;
+  }
+}
+
 .song i {
   color: #ccc;
 }
 
 .song__header{
+  border-top: none;
+  border-bottom: none;
   color: #aaa;
   font-weight: bold;
   font-size: 0.9em;
