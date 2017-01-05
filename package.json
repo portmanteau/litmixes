@@ -6,10 +6,11 @@
     "push-config": "heroku config:set METEOR_SETTINGS=\"$(cat settings.production.json)\""
   },
   "dependencies": {
+    "babel-runtime": "^6.20.0",
     "meteor-node-stubs": "^0.2.3",
     "ytdl-core": "^0.7.16"
   },
   "engines": {
-    "node": "4.1.1"
+    "node": "6.9.3"
   }
 }
