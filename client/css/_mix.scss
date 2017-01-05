@@ -12,11 +12,15 @@ header.main-header {
     border: none;
     float: right;
   }
+}
 
-  .fa.fa-question {
-    float: right;
-    margin-right: 1em;
-  }
+.fa.fa-question {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: white;
+  font-size: 1.2em;
+  z-index: 10;
 }
 
 .backdrop {

@@ -13,6 +13,7 @@
   display: flex;
   justify-content: flex-start;
   padding: 0.5em 1em;
+  position: relative;
 
   .fa-volume-up {
     display: none;
@@ -22,6 +23,12 @@
     .fa-volume-up {
       display: block;
     }
+  }
+
+  @media screen and (max-width: 660px) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5em 2.5em;
   }
 }
 
@@ -35,6 +42,13 @@
   .fa-play {
     display: none;
   }
+
+  @media screen and (max-width: 660px) {
+    position: absolute;
+    top: 50%;
+    margin-top: -9px;
+    left: 10px;
+  }
 }
 
 .song__title, .song__artist, .song__album {
@@ -44,7 +58,7 @@
   white-space: nowrap;
 
   @media screen and (max-width: 660px) {
-    width: auto;
+    width: 90%;
   }
 }
 
@@ -56,6 +70,10 @@
   color: #aaa;
   font-weight: bold;
   font-size: 0.9em;
+
+  @media screen and (max-width: 660px) {
+    display: none;
+  }
 }
 
 .real-song:hover {
@@ -86,5 +104,12 @@
 
   .real-song:hover & > * {
     opacity: 1;
+  }
+
+  @media screen and (max-width: 660px) {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    margin-top: -10px;
   }
 }
