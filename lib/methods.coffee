@@ -45,6 +45,13 @@ Meteor.methods
         Bucket: Meteor.settings.bucketName
         Key: song.slug + "/" + song.fileName
 
+  orderSongRemove: (songId) ->
+    order = getOrderForSong(songId)
+
+    order.splice(order.indexOf(songId), 1)
+
+    setOrder(order)
+
   orderSongTop: (songId) ->
     order = getOrderForSong(songId)
 
