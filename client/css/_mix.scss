@@ -4,6 +4,9 @@ header.main-header {
 
   .main-header__url {
     padding: 0.5em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   .container {
