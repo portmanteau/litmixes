@@ -1,6 +1,26 @@
 header.main-header {
   display: block;
-  padding-bottom: 0.5em;
+  font-size: 1.3em;
+
+  .main-header__url {
+    padding: 0.5em;
+  }
+
+  .container {
+    display: block;
+    text-align: center;
+    padding: 0.5em;
+    padding-right: 2em;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    @media screen and (max-width: 660px) {
+      position: static;
+      padding: 0.5em;
+      padding-top: 0em;
+    }
+  }
 
   button#play-mix {
     background: #55A32A;
@@ -10,25 +30,18 @@ header.main-header {
     padding-left: 1em;
     padding-right: 1em;
     border: none;
-    float: right;
 
     @media screen and (max-width: 660px) {
       float: none;
-      display: block;
-      margin: auto;
-      margin-top: 1em;
-      padding: 0.5em 1em;
+      padding: 0.25em 0.75em;
     }
   }
 }
 
-.fa.fa-question {
+.fa-question {
   position: absolute;
-  bottom: 5px;
-  right: 5px;
-  color: white;
-  font-size: 1.2em;
-  z-index: 10;
+  top: 17px;
+  right: 1em;
 }
 
 .backdrop {
