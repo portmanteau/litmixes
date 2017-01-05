@@ -16,7 +16,13 @@ class @Playlist
     @audio.pause()
     @index = index
 
-    @audio.src = Songs.findOne({ order: index }).url
+    try
+      @audio.src = Songs.findOne({ order: index }).url
+    catch error
+      if index == 0
+        index++
+        @audio.src = Songs.findOne({ order: index }).url
+
     @play()
 
     $('.song').removeClass('song--playing')
