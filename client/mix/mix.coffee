@@ -16,6 +16,17 @@ Template.mix.helpers
 keyBounce = null
 
 Template.mix.events
+  'click .fa-question': ->
+    text = "You've reached a mix on litmix.es. Litmix.es is a web app that makes
+    it easy to share mixes. There is no login with litmixes
+    and no security. To save a mix, just bookmark it. To share it, just share the
+    link. To add to it, you can drop an MP3 on the page, or you can search
+    YouTube. It's simple. Have fun. Be nice."
+
+    alert(text)
+
+    event.preventDefault()
+
   'keyup .mix__add-song-prompt input[type=text]': (event, template) ->
     clearTimeout(keyBounce)
 
@@ -37,6 +48,8 @@ Template.mix.events
     setTimeout ->
       $('body').toggleClass('add-song-open')
     , 10
+
+    event.preventDefault()
 
    'click .youtube-item__actions__add': (event, template) ->
      videoId = this.id.videoId
