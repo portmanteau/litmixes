@@ -12,6 +12,10 @@
   -webkit-user-select: none;
 }
 
+input {
+  -webkit-user-select: auto;
+}
+
 .litmix {
   color: white;
   min-height: 100vh;
