@@ -52,12 +52,18 @@ Template.mix.events
     event.preventDefault()
 
    'click .youtube-item__actions__add': (event, template) ->
+     $loader = $(event.target)
      videoId = this.id.videoId
      title = this.snippet.title
      slug = template.data.mix.slug
 
+     cachedHTML = $loader.html()
+
+     $loader.html("Loading...")
+
      Meteor.call('uploadVideo', this.id.videoId, title, slug, (err, resp) ->
        console.log(arguments)
+       $loader.html(cachedHTML)
 
        if err
          return
