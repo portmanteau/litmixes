@@ -111,6 +111,10 @@ Meteor.methods
 
       future = new Future()
 
+      stream.on 'error', (err)=>
+        console.error(err)
+        future.throw(new Error(err))
+
       upload = new AWS.S3.ManagedUpload
         params:
           ACL: "public-read"
@@ -127,3 +131,4 @@ Meteor.methods
         future.return(data)
 
       future.wait()
+

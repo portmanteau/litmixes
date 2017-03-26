@@ -51,33 +51,28 @@ Template.mix.events
 
     event.preventDefault()
 
-   'click .youtube-item__actions__add': (event, template) ->
-     $loader = $(event.target)
-     videoId = this.id.videoId
-     title = this.snippet.title
-     slug = template.data.mix.slug
+  'click .youtube-item__actions__add': (event, template) ->
+    $loader = $(event.target)
+    videoId = this.id.videoId
+    title = this.snippet.title
+    slug = template.data.mix.slug
 
-     cachedHTML = $loader.html()
+    cachedHTML = $loader.html()
 
-     $loader.html("Loading...")
+    $loader.html("Loading...")
 
-     Meteor.call('uploadVideo', this.id.videoId, title, slug, (err, resp) ->
-       console.log(arguments)
-       $loader.html(cachedHTML)
+    Meteor.call('uploadVideo', this.id.videoId, title, slug, (err, resp) ->
+      $loader.html(cachedHTML)
 
-       if err
-         return
+      if err
+        console.log(err)
+        alert(err.message)
+        return
 
-       data =
-         tags:
-           title: title
+      data =
+        tags:
+          title: title
 
-       # ?? I have no idea why it's sometimes key and sometimes Key
-       if resp.key
-         data.fileName = resp.key.split('/')[1]
-       else
-         data.fileName = resp.Key.split('/')[1]
-
-       Meteor.call('addSong', data, resp.Location, slug)
-     )
+      Meteor.call('addSong', data, resp.Location, slug)
+    )
 
