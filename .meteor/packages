@@ -21,7 +21,6 @@ insecure@1.0.7                # Allow all DB writes from clients (for prototypin
 fourseven:scss
 fortawesome:fontawesome
 coffeescript@1.11.1_4
-peerlibrary:aws-sdk
 meteorhacks:fast-render
 iron:router
 edgee:slingshot
@@ -29,3 +28,4 @@ matb33:collection-hooks
 renaldo:youtube-api
 reactive-dict@1.1.8
 shell-server
+eluck:aws-sdk
