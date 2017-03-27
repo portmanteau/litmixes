@@ -34,6 +34,9 @@ Meteor.methods
 
   deleteMp3: (song) ->
     if Meteor.isServer
+      Future = Npm.require('fibers/future')
+      myFuture = new Future()
+
       unless song.fileName
         song.fileName = song.url.split('/').slice(-1)[0]
 
@@ -41,9 +44,18 @@ Meteor.methods
 
       s3 = new AWS.S3()
 
-      s3.deleteObject
+      options =
         Bucket: Meteor.settings.bucketName
         Key: song.slug + "/" + song.fileName
+
+
+      s3.deleteObject options, (err, data) =>
+        if (err)
+          myFuture.return(err)
+        else
+          myFuture.return(data)
+
+      myFuture.wait()
 
   orderSongRemove: (songId) ->
     order = getOrderForSong(songId)
