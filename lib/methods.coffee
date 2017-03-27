@@ -33,15 +33,15 @@ Meteor.methods
         Meteor.call('orderSongBottom', songId)
 
   deleteMp3: (song) ->
-    unless song.fileName
-      song.fileName = song.url.split('/').slice(-1)[0]
-
-    console.log("DELETING: " + song.fileName)
-
     if Meteor.isServer
+      unless song.fileName
+        song.fileName = song.url.split('/').slice(-1)[0]
+
+      console.log("DELETING: " + song.fileName)
+
       s3 = new AWS.S3()
 
-      s3.deleteObjectSync
+      s3.deleteObject
         Bucket: Meteor.settings.bucketName
         Key: song.slug + "/" + song.fileName
 
