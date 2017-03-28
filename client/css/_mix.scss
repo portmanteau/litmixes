@@ -49,6 +49,9 @@ header.main-header {
 
 .backdrop {
   align-items: center;
+  background-size: contain;
+  background-repeat: repeat;
+  background-position: center;
   color: black;
   display: flex;
   font-size: 28vw;
@@ -56,7 +59,7 @@ header.main-header {
   justify-content: center;
   padding: 0 3rem;
   width: 100%;
-  position: absolute;
+  position: fixed;
   text-align: center;
   height: 100%;
   z-index: 0;
