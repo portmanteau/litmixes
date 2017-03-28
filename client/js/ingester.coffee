@@ -37,17 +37,24 @@
           @_chromeAddItem(entry, path + item.name + "/")
 
   _addFile: (file) ->
-    jsmediatags.read(
-      file,
-      {
-        onSuccess: (data) =>
-          @_uploadFile(file).then (url) ->
-            data.fileName = file.name
-            Meteor.call('addSong', data, url, Router.current().data().mix.slug)
-        onError: ->
-          alert("Not a valid file")
-      }
-    )
+    if file.type.match /image/
+      @_uploadFile(file).then (url) ->
+        data =
+          fileName: file.name
+
+        Meteor.call('addImage', data, url, Router.current().data().mix.slug)
+    else
+      jsmediatags.read(
+        file,
+        {
+          onSuccess: (data) =>
+            @_uploadFile(file).then (url) ->
+              data.fileName = file.name
+              Meteor.call('addSong', data, url, Router.current().data().mix.slug)
+          onError: ->
+            alert("Not a valid file")
+        }
+      )
 
   _uploadFile: (file) ->
     return new Promise (resolve, reject) ->
