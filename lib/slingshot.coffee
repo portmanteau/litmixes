@@ -2,6 +2,7 @@ Slingshot.fileRestrictions "userUpload",
   allowedFileTypes: [
     "audio/mp3",
     "audio/x-m4a",
+    "audio/wav",
     "image/png",
     "image/jpeg",
     "image/gif"
