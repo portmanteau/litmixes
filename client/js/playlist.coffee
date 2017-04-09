@@ -7,9 +7,14 @@ class @Playlist
     $('.fa-pause').on('click', @pause.bind(this))
     $('.fa-play').on( 'click', @play.bind(this))
     $('.fa-fast-forward').on('click', @advance.bind(this))
+    $('.fa-fast-backward').on('click', @retreat.bind(this))
 
   advance: ->
     @index++
+    @load(@index)
+
+  retreat: ->
+    @index--
     @load(@index)
 
   load: (i) ->

@@ -25,6 +25,13 @@
   display: none;
 }
 
+.control-bar {
+  .fa-play, .fa-pause {
+    font-size: 1.5em;
+    color: lime;
+  }
+}
+
 .playing .control-bar {
   .fa-pause {
     display: inline-block;
