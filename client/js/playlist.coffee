@@ -12,25 +12,28 @@ class @Playlist
     @index++
     @load(@index)
 
-  load: (index) ->
+  load: (i) ->
     @audio.pause()
-    @index = index
+    @index = i
 
     try
-      @audio.src = Songs.findOne({ order: index }).url
+      @audio.src = Songs.findOne({ order: @index }).url
     catch error
-      if index == 0
-        index++
-        @audio.src = Songs.findOne({ order: index }).url
+      if @index == 0
+        @index++
+        @audio.src = Songs.findOne({ order: @index }).url
 
     @play()
 
-    $('.song').removeClass('song--playing')
-    $(".song[data-order=#{index}]").addClass('song--playing')
-
   play: ->
+    if !@index
+      @load(0)
+      return
+
     @audio.play()
     $('body').addClass('playing')
+    $('.song').removeClass('song--playing')
+    $(".song[data-order=#{@index}]").addClass('song--playing')
 
   pause: ->
     @audio.pause()
