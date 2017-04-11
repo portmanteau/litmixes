@@ -5,9 +5,6 @@
 
 body {
   background-color: black;
-  background-image: url("space-sun-solar-flare-animation-8.gif");
-  background-repeat: no-repeat;
-  background-position: top center;
   color: white;
   font-family: "Anonymous Pro";
   line-height: 1.5;
@@ -53,11 +50,13 @@ input[type="submit"] {
   background-color: transparent;
   background-image: url("coollogo_com-22009629.gif");
   border: none;
-  background-size: cover;
+  background-size: contain;
   color: transparent;
   font-size: 2rem;
-  padding: 0 1em;
-  width: 280px;
+  width: 90vw;
+  height: 0;
+  padding-top: 17%;
+  background-repeat: no-repeat;
 }
 
 .litmix {

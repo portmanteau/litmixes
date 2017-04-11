@@ -2,14 +2,30 @@
   font-size: 2em;
   text-align:center;
   padding: 1em;
+  position: relative;
 
   & h1, & form > div {
     margin-top: 3em;
   }
 }
 
+.home-backdrop {
+  background-image: url("space-sun-solar-flare-animation-8.gif");
+  background-position: top center;
+  background-repeat: no-repeat;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
 .slug-container {
   position: relative;
+}
+
+.submit-container {
+  margin-top: 2em !important;
 }
 
 .blinker {
