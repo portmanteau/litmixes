@@ -136,7 +136,7 @@ Meteor.methods
         params:
           ACL: "public-read"
           Bucket: Meteor.settings.bucketName
-          Key: slug + "/" + title + ".mp4"
+          Key: slug + "/" + title + ".m4a"
           Body: stream
 
       upload.send (err, data) ->
