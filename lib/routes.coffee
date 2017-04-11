@@ -10,6 +10,9 @@ Router.route "/",
     [
       Meteor.subscribe("mixes")
     ]
+  onAfterAction: ->
+    if this.ready()
+      $('input[name="slug"]').focus()
 
 Router.route "/:slug",
   template: "mix"

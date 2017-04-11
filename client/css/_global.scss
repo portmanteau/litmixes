@@ -44,12 +44,15 @@ input {
 }
 
 input[type="submit"] {
-  background: url("flame_block_e0.gif");
+  // background: url("flame_block_e0.gif");
+  background-color: transparent;
+  background-image: url("coollogo_com-22009629.gif");
   border: none;
   background-size: cover;
-  color: white;
+  color: transparent;
   font-size: 2rem;
   padding: 0 1em;
+  width: 280px;
 }
 
 .litmix {

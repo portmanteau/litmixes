@@ -13,3 +13,11 @@ Template.home.events
       })
 
       Router.go("mix", {slug: slug})
+
+  'click .slug-container': (event) ->
+    $('.blinker').css('display', 'none')
+
+  'keydown input[name="slug"]': ->
+    $('.blinker').css('display', 'none')
+
+
