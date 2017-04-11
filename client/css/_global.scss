@@ -67,10 +67,6 @@ input[type="submit"] {
   border: 3px solid transparent;
   position: relative;
   z-index: 1;
-
-  &.dragover {
-    border-color: violet;
-  }
 }
 
 [draggable] {
