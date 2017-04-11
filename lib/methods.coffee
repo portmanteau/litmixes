@@ -120,24 +120,33 @@ Meteor.methods
     if Meteor.isServer
       ytdl = Npm.require('ytdl-core')
       Future = Npm.require('fibers/future')
+      future = new Future()
+      Readable = require("stream").Readable
 
       stream = ytdl(
         "http://www.youtube.com/watch?v=#{videoId}",
         filter: 'audioonly'
       )
 
-      future = new Future()
-
       stream.on 'error', (err)=>
         console.error(err)
         future.throw(new Error(err))
+
+      mp3Stream = ffmpeg({source: stream})
+        .on 'error', (err) ->
+          console.log('An error occurred: ' + err.message)
+        .on 'end', ->
+          console.log('Processing finished!')
+        .audioCodec('libmp3lame')
+        .format("mp3")
+        .pipe()
 
       upload = new AWS.S3.ManagedUpload
         params:
           ACL: "public-read"
           Bucket: Meteor.settings.bucketName
-          Key: slug + "/" + title + ".m4a"
-          Body: stream
+          Key: slug + "/" + title + ".mp3"
+          Body: mp3Stream
 
       upload.send (err, data) ->
         if err
