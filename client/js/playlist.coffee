@@ -28,8 +28,7 @@ class @Playlist
         @index++
         @audio.src = Songs.findOne({ order: @index }).url
 
-    setTimeout =>
-      @play()
+    @play()
 
   play: ->
     if !@audio.src
