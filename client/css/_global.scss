@@ -8,7 +8,11 @@ body {
   font-family: "Anonymous Pro";
   line-height: 1.5;
   min-height: 100vh;
-  text-shadow: 0 3px 2px black;
+  text-shadow:
+   -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
 }
 
 a {
