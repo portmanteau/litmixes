@@ -29,5 +29,14 @@ Router.route "/:slug",
 
   onAfterAction: ->
     if this.ready()
-      Droppable.initialize('[data-js=drop]')
-      exports.playlist = new Playlist()
+      if Meteor.isClient
+        Droppable.initialize('[data-js=drop]')
+        exports.playlist = new Playlist()
+        mix = this.data().mix
+
+        SEO.set
+          title: "litmix.es/#{mix.slug}"
+          description: "A lit mix"
+          og:
+            image: mix.backgroundUrl
+
