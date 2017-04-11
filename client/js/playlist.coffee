@@ -24,14 +24,15 @@ class @Playlist
     try
       @audio.src = Songs.findOne({ order: @index }).url
     catch error
-      if @index == 0
+      if @index < Songs.find().count()
         @index++
         @audio.src = Songs.findOne({ order: @index }).url
 
-    @play()
+    setTimeout =>
+      @play()
 
   play: ->
-    if !@index
+    if !@audio.src
       @load(0)
       return
 
