@@ -1,9 +1,13 @@
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
 }
 
 body {
-  background: #111;
+  background-color: black;
+  background-image: url("space-sun-solar-flare-animation-8.gif");
+  background-repeat: no-repeat;
+  background-position: top center;
   color: white;
   font-family: "Anonymous Pro";
   line-height: 1.5;
@@ -24,9 +28,49 @@ a:hover {
   text-decoration: underline;
 }
 
+h1 {
+  font-size: 1em;
+}
+
 input[type=text] {
-  background: black;
+  background: transparent;
   color: white;
   padding: 0.5em;
   width: 100%;
+}
+
+input {
+  -webkit-user-select: auto;
+}
+
+input[type="submit"] {
+  background: url("flame_block_e0.gif");
+  border: none;
+  background-size: cover;
+  color: white;
+  font-size: 2rem;
+  padding: 0 1em;
+}
+
+.litmix {
+  min-height: 100vh;
+  padding-bottom: 5em;
+  transition: border-color 1s;
+  border: 3px solid transparent;
+  position: relative;
+  z-index: 1;
+
+  &.dragover {
+    border-color: violet;
+  }
+}
+
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Required to make elements draggable in old WebKit */
+  -khtml-user-drag: element;
+  -webkit-user-drag: element;
 }
