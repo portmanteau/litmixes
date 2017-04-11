@@ -1,4 +1,4 @@
 Template.mix.helpers
   backgroundUrl: ->
-    if this.ready && this.mix.backgroundUrl
+    if this.mix && this.mix.backgroundUrl
       this.mix.backgroundUrl
