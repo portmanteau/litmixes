@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "meteor --settings settings.json",
-    "push-config": "heroku config:set METEOR_SETTINGS=\"$(cat settings.json)\""
+    "push-config": "heroku config:set METEOR_SETTINGS=\"$(cat settings.production.json)\""
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
