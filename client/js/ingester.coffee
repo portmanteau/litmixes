@@ -79,7 +79,12 @@
         else
           resolve(downloadUrl)
 
+      $('.progress').addClass('progress--active')
+
       Deps.autorun =>
         progress = Math.round(uploader.progress() * 100)
-        $('.progress-bar').width("#{progress}%")
-        $('.sr-only').text("#{progress}%")
+        $('.progress-bar').height("#{progress}%")
+        $('.progress-text').text("#{progress}%")
+
+        if (progress == 100)
+          $('.progress').removeClass('progress--active')

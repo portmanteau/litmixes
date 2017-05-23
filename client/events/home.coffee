@@ -9,7 +9,7 @@ Template.home.events
     else
       id = Mixes.insert({
         slug: slug,
-        createdAt: new Date()
+        createdAt: new Date(),
       })
 
       Router.go("mix", {slug: slug})
