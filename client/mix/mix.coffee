@@ -61,8 +61,18 @@ Template.mix.events
 
     $loader.html("Loading...")
 
+    $('.progress-text').text("Loading...")
+    $('.progress').addClass('progress--active')
+
+    Streamy.on 'uploadPercentage', (data) ->
+      if data.slug == slug
+        $('.progress-bar').height("#{data.percent}%")
+        $('.progress-text').text("#{data.percent}%")
+
     Meteor.call('uploadVideo', this.id.videoId, title, slug, (err, resp) ->
       $loader.html(cachedHTML)
+      Streamy.off('uploadPercentage')
+      $('.progress').removeClass('progress--active')
 
       if err
         console.log(err)

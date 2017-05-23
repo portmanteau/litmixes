@@ -111,7 +111,6 @@ Meteor.methods
         maxResults: 5,
         q: search,
       , (err, data) ->
-        console.log(err, data)
         myFuture.return(data)
 
       myFuture.wait()
@@ -155,6 +154,16 @@ Meteor.methods
           console.log data
 
         future.return(data)
+
+      upload.on 'httpUploadProgress', (progress) ->
+        if progress.total
+          percent = progress.loaded/progress.total * 100
+          Streamy.broadcast(
+            'uploadPercentage', {
+              percent: Math.floor(percent)
+              slug: slug
+            }
+          )
 
       future.wait()
 
