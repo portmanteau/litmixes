@@ -37,13 +37,21 @@
           @_chromeAddItem(entry, path + item.name + "/")
 
   _addFile: (file) ->
+    if file.name.match(/#/)
+      alert("Please don't use '#' in your file name")
+      return
+
+    if file.name.match(/\?/)
+      alert("Please don't use '?' in your file name")
+      return
+
     if file.type.match /image/
       @_uploadFile(file).then (url) ->
         data =
           fileName: file.name
 
         Meteor.call('addImage', data, url, Router.current().data().mix.slug)
-    else
+    else if file.type.match /mp3/ || file.type.match /m4a/
       jsmediatags.read(
         file,
         {
@@ -55,6 +63,9 @@
             alert("Not a valid file")
         }
       )
+    else if file.type.match /audio/
+      @_uploadFile(file).then (url) ->
+        Meteor.call('addSong', data, url, Router.current().data().mix.slug)
 
   _uploadFile: (file) ->
     return new Promise (resolve, reject) ->
