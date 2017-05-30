@@ -1,3 +1,4 @@
+
 header.main-header {
   display: block;
   font-size: 1.3em;
@@ -63,6 +64,17 @@ header.main-header {
   text-align: center;
   width: 100%;
   z-index: 0;
+}
+
+.litmix {
+  opacity: 0;
+  transition: 0.2s opacity;
+  cursor: none;
+
+  &.litmix--active {
+    cursor: default;
+    opacity: 1;
+  }
 }
 
 .mix__add-song-prompt {

@@ -89,6 +89,7 @@ mongo-id@1.0.6
 msavin:jetsetter@2.0.0
 msavin:mongol@2.0.1
 npm-mongo@2.2.11_2
+numtel:template-from-string@0.1.0
 observe-sequence@1.0.14
 ordered-dict@1.0.9
 promise@0.8.8

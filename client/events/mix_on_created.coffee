@@ -13,10 +13,13 @@ Template.mix.onCreated ->
 
   yt = new YTPlayer('yes', playerVars)
 
-  Tracker.autorun(()->
-    yt_id = 'VXPXkAhB6ek' # the video id for a youtube video
+  Deps.autorun(()=>
+    data = Router.current().data()
 
-    if yt.ready()
-      yt.player.loadVideoById(yt_id)
-      yt.player.mute()
+    if data && data.mix
+      yt_id = data.mix.youtubeId
+
+      if yt.ready()
+        yt.player.loadVideoById(yt_id)
+        yt.player.mute()
   )

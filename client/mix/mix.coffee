@@ -51,6 +51,14 @@ Template.mix.events
 
     event.preventDefault()
 
+  'click .youtube-item__actions__background': (event, template) ->
+    videoId = this.id.videoId
+
+    Mixes.update(
+      { _id: template.data.mix._id },
+      { $set: { youtubeId: videoId }}
+    )
+
   'click .youtube-item__actions__add': (event, template) ->
     $loader = $(event.target)
     videoId = this.id.videoId
