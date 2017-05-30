@@ -16,6 +16,15 @@ Template.mix.helpers
 keyBounce = null
 mouseBounce = null
 
+onAction = ->
+  clearTimeout(mouseBounce)
+
+  $('.litmix').addClass('litmix--active')
+
+  mouseBounce = setTimeout( ->
+    $('.litmix').removeClass('litmix--active')
+  , 3000)
+
 Template.mix.events
   'click .fa-question': ->
     text = "You've reached a mix on litmix.es. Litmix.es is a web app that makes
@@ -60,14 +69,8 @@ Template.mix.events
       { $set: { youtubeId: videoId }}
     )
 
-  'mousemove .litmix': ->
-    clearTimeout(mouseBounce)
-
-    $('.litmix').addClass('litmix--active')
-
-    mouseBounce = setTimeout( ->
-      $('.litmix').removeClass('litmix--active')
-    , 20000)
+  'mousemove .litmix': onAction
+  'keydown .litmix': onAction
 
   'click .youtube-item__actions__add': (event, template) ->
     $loader = $(event.target)
