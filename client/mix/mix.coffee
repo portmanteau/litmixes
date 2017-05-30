@@ -14,6 +14,7 @@ Template.mix.helpers
     results = Template.instance().search.get('results')
 
 keyBounce = null
+mouseBounce = null
 
 Template.mix.events
   'click .fa-question': ->
@@ -58,6 +59,15 @@ Template.mix.events
       { _id: template.data.mix._id },
       { $set: { youtubeId: videoId }}
     )
+
+  'mousemove .litmix': ->
+    clearTimeout(mouseBounce)
+
+    $('.litmix').addClass('litmix--active')
+
+    mouseBounce = setTimeout( ->
+      $('.litmix').removeClass('litmix--active')
+    , 5000)
 
   'click .youtube-item__actions__add': (event, template) ->
     $loader = $(event.target)
