@@ -3,6 +3,11 @@
     {{#unless backgroundUrl }}
       Drop<br/>Files
     {{/unless}}
+    {{#if mix.youtubeId }}
+      <div class="backgroundVideo">
+        {{> YTPlayer name="yes" }}
+      </div>
+    {{/if}}
   </div>
   <div class="litmix" data-js="drop">
     <header class="main-header">
