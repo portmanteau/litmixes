@@ -67,7 +67,7 @@ Template.mix.events
 
     mouseBounce = setTimeout( ->
       $('.litmix').removeClass('litmix--active')
-    , 5000)
+    , 20000)
 
   'click .youtube-item__actions__add': (event, template) ->
     $loader = $(event.target)

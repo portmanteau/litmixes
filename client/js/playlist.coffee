@@ -46,4 +46,4 @@ class @Playlist
     $('.song').removeClass('song--playing')
 
   _bindEvents: ->
-    @audio.addEventListener('ended', @advance.bind(this))
+    @audio.addEventListener('ended', @advance.bind(this), false)
