@@ -1,6 +1,6 @@
 <template name="mix">
   <div class="backdrop" style="background-image: url({{backgroundUrl}})">
-    {{#unless backgroundUrl }}
+    {{#unless hasBackground }}
       Drop<br/>Files
     {{/unless}}
     {{#if mix.youtubeId }}
