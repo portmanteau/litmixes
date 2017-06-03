@@ -4,6 +4,7 @@ Template.mix.onCreated ->
     controls: 0,        # Hide pause/play buttons in player
     showinfo: 0,        # Hide the video title
     modestbranding: 1,  # Hide the Youtube Logo
+    playsinline: 1,
     loop: 1,            # Run the video in a loop
     fs: 0,              # Hide the full screen button
     cc_load_policy: 0,  # Hide closed captions
