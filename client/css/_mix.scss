@@ -99,6 +99,7 @@ header.main-header {
   padding: 1em;
   border-bottom: 1px solid #222;
   display: flex;
+  position: relative;
 }
 
 .youtube-item__thumbnail {
@@ -109,12 +110,16 @@ header.main-header {
   padding: 0.5em;
   padding-bottom: 2em;
   color: white;
-  position: relative;
   width: 100%;
 }
 
 .youtube-item__actions {
   position: absolute;
-  bottom: 0px;
+  bottom: 10px;
   right: 0px;
+
+  > a {
+    margin-right: 15px;
+    color: cornflowerblue;
+  }
 }
