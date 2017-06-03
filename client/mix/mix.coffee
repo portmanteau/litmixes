@@ -1,3 +1,5 @@
+import isMobile from 'ismobilejs'
+
 Template.mix.onCreated ->
   search = this.search = new ReactiveDict()
 
@@ -22,8 +24,9 @@ onAction = ->
   $('.litmix').addClass('litmix--active')
 
   mouseBounce = setTimeout( ->
-    $('.litmix').removeClass('litmix--active')
-  , 3000)
+    unless isMobile.any
+      $('.litmix').removeClass('litmix--active')
+  , 15000)
 
 Template.mix.events
   'click .fa-question': ->
