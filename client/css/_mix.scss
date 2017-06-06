@@ -67,9 +67,10 @@ header.main-header {
 }
 
 .litmix {
+  background: rgba(0,0,0,0.4);
+  cursor: none;
   opacity: 0;
   transition: 0.2s opacity;
-  cursor: none;
 
   &.litmix--active {
     cursor: default;

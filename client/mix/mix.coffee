@@ -26,7 +26,7 @@ onAction = ->
   mouseBounce = setTimeout( ->
     unless isMobile.any
       $('.litmix').removeClass('litmix--active')
-  , 15000)
+  , 3000)
 
 Template.mix.events
   'click .fa-question': ->
