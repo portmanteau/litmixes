@@ -21,6 +21,12 @@ Template.mix.onCreated ->
       yt_id = data.mix.youtubeId
 
       if yt.ready()
+        console.log(yt)
         yt.player.loadVideoById(yt_id)
         yt.player.mute()
+
+        yt.player.addEventListener 'onStateChange', (event)=>
+          if event.data == YT.PlayerState.ENDED
+            yt.player.loadVideoById(yt_id)
+            yt.player.mute()
   )
