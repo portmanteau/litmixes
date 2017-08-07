@@ -92,7 +92,7 @@ Template.mix.events
     Streamy.on 'uploadPercentage', (data) ->
       if data.slug == slug
         $('.progress-bar').height("#{data.percent}%")
-        $('.progress-text').text("#{data.percent}%")
+        $('.progress-text').html("#{data.message} <br/> #{data.percent}%")
 
     Meteor.call('uploadVideo', this.id.videoId, title, slug, (err, resp) ->
       $loader.html(cachedHTML)

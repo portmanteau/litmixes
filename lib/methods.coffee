@@ -121,33 +121,77 @@ Meteor.methods
       Future = Npm.require('fibers/future')
       future = new Future()
       Readable = require("stream").Readable
+      ytVideo = {}
 
-      stream = ytdl(
+      progressFunction = (progress) ->
+        data = {
+          loaded: 1,
+          total: 100,
+          message: "Loading...",
+          slug: slug
+        }
+
+        _.extend(data, progress)
+
+        console.log(data)
+        percent = Math.floor(
+          100*(Number(data.loaded)/Number(data.total))
+        )
+        console.log(percent)
+
+        Streamy.broadcast(
+          'uploadPercentage', {
+            message: progress.message
+            percent: percent
+            slug: slug
+          }
+        )
+
+      ytStream = ytdl(
         "http://www.youtube.com/watch?v=#{videoId}",
         filter: 'audioonly'
       )
 
-      stream.on 'error', (err)=>
+      ytStream.on 'error', (err)=>
         console.error(err)
         future.throw(new Error(err))
 
-      mp3Stream = ffmpeg({source: stream})
+      ytStream.on 'progress', (event) =>
+        console.log('ytProgress')
+        console.log(event)
+
+      ytStream.on 'info', (event) =>
+        ytVideo.length_seconds = event.length_seconds
+
+      mp3Stream = ffmpeg({source: ytStream})
         .on 'error', (err) ->
           console.log('An error occurred: ' + err.message)
         .on 'end', ->
           console.log('Processing finished!')
+        .on 'progress', (event) ->
+          console.log('mp3Event')
+          console.log(event)
+          loadedSeconds = event.timemark.split(':')[1]*60
+          totalSeconds = ytVideo.length_seconds
+          progress = {
+            loaded: loadedSeconds
+            total: totalSeconds
+            message: "Compressing Audio"
+          }
+
+          progressFunction(progress)
         .audioCodec('libmp3lame')
         .format("mp3")
         .pipe()
 
-      upload = new AWS.S3.ManagedUpload
+      uploadStream = new AWS.S3.ManagedUpload
         params:
           ACL: "public-read"
           Bucket: Meteor.settings.bucketName
           Key: slug + "/" + title + ".mp3"
           Body: mp3Stream
 
-      upload.send (err, data) ->
+      uploadStream.send (err, data) ->
         if err
           console.error err
         else
@@ -155,15 +199,19 @@ Meteor.methods
 
         future.return(data)
 
-      upload.on 'httpUploadProgress', (progress) ->
+      uploadStream.on 'httpUploadProgress', (progress) =>
+        console.log('uploadEvent')
         if progress.total
-          percent = progress.loaded/progress.total * 100
-          Streamy.broadcast(
-            'uploadPercentage', {
-              percent: Math.floor(percent)
-              slug: slug
-            }
-          )
+          ytVideo.totalBytes = progress.total
+
+        progress = {
+          loaded: progress.loaded
+          total: ytVideo.totalBytes
+          message: "Uploading Video"
+        }
+
+        if progress.loaded && ytVideo.totalBytes
+          progressFunction(progress)
 
       future.wait()
 

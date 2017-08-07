@@ -83,6 +83,7 @@
 
       Deps.autorun =>
         progress = Math.round(uploader.progress() * 100)
+
         $('.progress-bar').height("#{progress}%")
         $('.progress-text').text("#{progress}%")
 
