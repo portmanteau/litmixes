@@ -1,5 +1,3 @@
-import { shuffle } from 'lodash'
-
 class @Playlist
   constructor: ->
     @audio = $('audio')[0]
