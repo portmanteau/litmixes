@@ -37,6 +37,9 @@ Meteor.methods
       if !!songId
         Meteor.call('orderSongBottom', songId)
 
+      if Meteor.isClient
+        playlist.shuffle()
+
   deleteMp3: (song) ->
     if Meteor.isServer
       Future = Npm.require('fibers/future')

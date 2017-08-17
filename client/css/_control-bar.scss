@@ -16,6 +16,8 @@
   cursor: pointer;
   margin-left: 1em;
   margin-right: 1em;
+  font-size: 0.8em;
+  color: gray;
 }
 
 .control-bar > i:hover {
@@ -30,6 +32,12 @@
   .fa-play, .fa-pause {
     font-size: 1.5em;
     color: lime;
+  }
+}
+
+.control-bar__random .control-bar {
+  .fa-random {
+    color: green;
   }
 }
 
