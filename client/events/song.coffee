@@ -3,7 +3,7 @@ Template.song.events
     $song = $(event.target).parents('.song')
     index = $song.data('order')
 
-    playlist.load(index)
+    playlist.load(index, true)
 
   'click .song__remove': (event) ->
     title = this.title || this.fileName

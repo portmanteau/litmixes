@@ -25,9 +25,12 @@ class @Playlist
 
     loadIndex
 
-  load: (i) ->
+  load: (i, literal) ->
     @audio.pause()
     @index = i
+
+    if literal && $('body').hasClass('control-bar__random')
+      @index = @shuffleOrder.indexOf(i)
 
     try
       @audio.src = Songs.findOne({ order: @loadIndex()}).url
