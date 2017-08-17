@@ -9,6 +9,7 @@
     "babel-runtime": "^6.20.0",
     "ismobilejs": "^0.4.1",
     "meteor-node-stubs": "^0.2.3",
+    "smoothscroll-polyfill": "^0.3.6",
     "ytdl-core": "^0.10.3"
   },
   "engines": {

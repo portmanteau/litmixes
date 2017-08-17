@@ -81,10 +81,9 @@ header.main-header {
 .mix__add-song-prompt {
   // -webkit-filter: blur(20px);
   display: none;
-  margin-top: 0.5em;
   opacity: 0;
   overflow: hidden;
-  padding: 0 0.5em;
+  padding: 0.5em 0.5em;
   transform-origin: 0% 0%;
   transform: rotateX(90deg);
   transition: all 0.2s;

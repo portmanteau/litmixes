@@ -1,4 +1,5 @@
 import isMobile from 'ismobilejs'
+require("smoothscroll-polyfill").polyfill()
 
 Template.mix.onCreated ->
   search = this.search = new ReactiveDict()
@@ -55,8 +56,14 @@ Template.mix.events
     if $('body').hasClass('add-song-open')
       $prompt.one 'transitionend', ->
         $prompt.css('display', 'none')
+
     else
       $prompt.css('display', 'block')
+
+      event.currentTarget.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      })
 
     setTimeout ->
       $('body').toggleClass('add-song-open')

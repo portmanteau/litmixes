@@ -6,12 +6,13 @@
   & .fa-plus {
     // color: #EE4503;
     color: lime;
-    transition: 0.5s transform;
+    transition: 0.5s all;
     font-size: 2em;
   }
 
   .add-song-open & .fa-plus {
     transform: rotate(45deg);
+    color: #EE4503;
   }
 }
 

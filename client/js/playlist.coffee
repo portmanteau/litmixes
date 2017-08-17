@@ -38,6 +38,7 @@ class @Playlist
       if @index < Songs.find().count()
         @index++
       else
+        @shuffle()
         @index = 0
 
       return this.load(@index)
