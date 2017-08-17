@@ -58,14 +58,19 @@ class @Playlist
 
   shuffle: ->
     @shuffleOrder = []
-    standardOrder = Array.apply(null, Array(Songs.find().count())).map (_undef, index) ->
+    standardOrder = Array.apply(null, Array(Songs.find().count())).map (_undef, index) =>
       return index
 
     while (standardOrder.length > 0)
       index = Math.floor(Math.random() * standardOrder.length)
       @shuffleOrder = @shuffleOrder.concat( standardOrder.splice(index, 1) )
 
+    @index = @shuffleOrder.indexOf(@index)
+
     @shuffleOrder
+
+  unshuffle: ->
+    @index = @shuffleOrder.indexOf(@index)
 
   _bindEvents: ->
     @audio.addEventListener('ended', @advance.bind(this), false)
