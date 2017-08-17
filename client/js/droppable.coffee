@@ -3,6 +3,8 @@ class @Droppable
     $(selector).each ->
       new Droppable(this)
 
+    true
+
   constructor: (element) ->
     @$el = $(element)
 

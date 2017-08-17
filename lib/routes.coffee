@@ -33,8 +33,8 @@ Router.route "/:slug",
   onAfterAction: ->
     if this.ready()
       if Meteor.isClient
-        Droppable.initialize('[data-js=drop]')
-        exports.playlist = new Playlist()
+        exports.droppables = exports.droppables || Droppable.initialize('[data-js=drop]')
+        exports.playlist = exports.playlist || new Playlist()
         mix = this.data().mix
 
         SEO.set
