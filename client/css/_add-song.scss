@@ -1,8 +1,18 @@
 .add-song {
   border-top: 1px solid #333;
-  color: cornflowerblue;
   display: block;
   padding: 0.5em 1em;
+
+  & .fa-plus {
+    // color: #EE4503;
+    color: lime;
+    transition: 0.5s transform;
+    font-size: 2em;
+  }
+
+  .add-song-open & .fa-plus {
+    transform: rotate(45deg);
+  }
 }
 
 .add-song {
@@ -13,9 +23,11 @@
 .add-song:hover {
   background: rgba(50,50,50,0.5);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .add-song.dragover {
   background: white;
   color: black;
 }
+

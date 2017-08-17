@@ -14,8 +14,8 @@
 
 .control-bar > i {
   cursor: pointer;
-  margin-left: 1em;
-  margin-right: 1em;
+  margin-left: 0.7rem;
+  margin-right: 0.7rem;
   font-size: 0.8em;
 }
 
@@ -30,7 +30,7 @@
 .control-bar {
   .fa-play, .fa-pause {
     font-size: 1.5em;
-    color: lime;
+    color: #EE4503;
   }
 }
 
