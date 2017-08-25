@@ -56,9 +56,14 @@
   right: 0;
 
   .control-bar__timecode-active & {
-    font-size: 50vw;
+    font-size: 10rem;
     bottom: auto;
     top: 0;
     width: 100%;
   }
+}
+
+#range {
+  width: 100%;
+  user-select: none;
 }

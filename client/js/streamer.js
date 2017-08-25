@@ -124,15 +124,11 @@ export default class Streamer {
       let value = event.target.value;
       let localOffset = 10*(value-50)/1000
 
-      document.getElementById('range-reader').innerHTML = localOffset;
-
       this.playlist.audio.playbackRate = 1 + localOffset
     })
 
     let mouseup = (event)=> {
       event.target.value = 50
-
-      document.getElementById('range-reader').innerHTML = 0;
 
       this.playlist.audio.playbackRate = 1;
     }

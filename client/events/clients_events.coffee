@@ -7,3 +7,5 @@ Template.clients.events
     Clients.update( { _id: clientId }, { $set: {
       watchedSid: sid
     }})
+
+    playlist.play()
