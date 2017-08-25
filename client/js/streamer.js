@@ -39,7 +39,8 @@ export default class Streamer {
       const onPlay = () => {
         Streamy.rooms(options.slug).emit('play', {
           "index": options.playlist.index,
-          "currentTime": options.playlist.audio.currentTime
+          "currentTime": options.playlist.audio.currentTime,
+          "localTime": Date.now()
         })
       }
 
@@ -71,12 +72,14 @@ export default class Streamer {
           options.playlist.play()
 
           var playDate = Date.now()
+          const socketLag = (Date.now() - data.localTime)/1000;
 
           var onPlayThroughReady = ()=> {
-            const timeDiff = (Date.now() - playDate)/1000;
-            const finalTime = Number(data.currentTime) + timeDiff
+            const loadLag = (Date.now() - playDate)/1000;
+            const finalTime = Number(data.currentTime) + loadLag + socketLag;
 
-            console.log("Adding " + timeDiff)
+            console.log("loadLag: " + loadLag)
+            console.log("socketLag " + socketLag)
             console.log("Final time " + finalTime)
             options.playlist.audio.currentTime = finalTime;
             options.playlist.play()
