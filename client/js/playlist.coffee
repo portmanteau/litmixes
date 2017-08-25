@@ -1,5 +1,7 @@
+import Streamer from  './streamer'
+
 class @Playlist
-  constructor: ->
+  constructor: (options) ->
     @audio = $('audio')[0]
     @index = 0
     @_bindEvents()
