@@ -6,8 +6,13 @@ Meteor._debug = (function (super_meteor_debug) {
   }
 })(Meteor._debug);
 
+offset = 0;
+
 export default class Streamer {
   constructor(options) {
+    this.bindEvents();
+    this.playlist = options.playlist;
+
     Streamy.onConnect(()=> {
       Deps.autorun(() => {
         client = Clients.findOne({ sid: Streamy.id() })
@@ -60,58 +65,87 @@ export default class Streamer {
         }
       });
 
-      let playFunc = (data)=> {
-        if (data.__from === sid)
-          return
-
-        if (data.__from === this.watchedSid) {
-          if (options.playlist.index !== data.index) {
-            options.playlist.load(data.index)
-          }
-
-          options.playlist.audio.currentTime = data.currentTime
-          options.playlist.play()
-
-          var playDate = Date.now()
-          const socketLag = (Date.now() - data.localTime)/1000;
-
-          var onPlayThroughReady = ()=> {
-            const loadLag = (Date.now() - playDate)/1000;
-            const finalTime = Number(data.currentTime) + loadLag + socketLag;
-
-            console.log("loadLag: " + loadLag)
-            console.log("socketLag " + socketLag)
-            console.log("Final time " + finalTime)
-            options.playlist.audio.currentTime = finalTime;
-            options.playlist.play()
-            console.log(options.playlist.audio.currentTime)
-
-            options.playlist.audio.removeEventListener(
-              'canplaythrough',
-              onPlayThroughReady
-            )
-          };
-
-          options.playlist.audio.addEventListener(
-            'canplaythrough',
-            onPlayThroughReady
-          )
-        }
-      }
-
-      Streamy.on('play', playFunc.bind(this))
+      Streamy.on('play', this.playFunc.bind(this))
 
       Streamy.on('timeupdate', (data)=> {
         if (data.__from === Streamy.id())
           return
 
         if (this.playOnce) {
-          playFunc.call(this, data)
+          this.playFunc.call(this, data)
           this.playOnce = false;
         }
 
         $(`[data-sid="${data.__from}"]`).find('.time').text(data.currentTime)
       })
     });
+  }
+
+  playSync(options) {
+    let currentTime = options.currentTime || this.playlist.audio.currentTime;
+    let lag = options.lag || 0;
+
+    this.playlist.audio.currentTime = currentTime + lag;
+    this.playlist.play()
+  }
+
+  playFunc (data) {
+    if (data.__from === sid)
+      return
+
+    if (data.__from === this.watchedSid) {
+      if (this.playlist.index !== data.index) {
+        this.playlist.load(data.index)
+      }
+
+      this.playSync({ currentTime: data.currentTime })
+
+      var playDate = Date.now()
+
+      var onPlayThroughReady = ()=> {
+        const loadLag = (Date.now() - playDate)/1000;
+        this.playSync({ currentTime: data.currentTime, lag: loadLag })
+
+        this.playlist.audio.removeEventListener(
+          'canplaythrough',
+          onPlayThroughReady
+        )
+      };
+
+      this.playlist.audio.addEventListener(
+        'canplaythrough',
+        onPlayThroughReady
+      )
+    }
+  }
+
+  bindEvents() {
+    document.getElementById('range').addEventListener('input', (event)=> {
+      let value = event.target.value;
+      let localOffset = 10*(value-50)/1000
+
+      document.getElementById('range-reader').innerHTML = localOffset;
+
+      this.playlist.audio.playbackRate = 1 + localOffset
+    })
+
+    let mouseup = (event)=> {
+      event.target.value = 50
+
+      document.getElementById('range-reader').innerHTML = 0;
+
+      this.playlist.audio.playbackRate = 1;
+    }
+
+    document.getElementById('range').addEventListener('mouseup',  mouseup)
+    document.getElementById('range').addEventListener('touchend',  mouseup)
+  }
+
+  updateOffset(newOffset) {
+    const offsetDiff = newOffset - offset;
+
+    this.playSync({offset: offsetDiff})
+
+    offset = newOffset;
   }
 }

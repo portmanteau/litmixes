@@ -49,3 +49,16 @@
     display: none;
   }
 }
+
+.control-bar__timecode {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+
+  .control-bar__timecode-active & {
+    font-size: 50vw;
+    bottom: auto;
+    top: 0;
+    width: 100%;
+  }
+}

@@ -1,4 +1,5 @@
 import Streamer from  './streamer'
+timecodeInterval = null
 
 class @Playlist
   constructor: (options) ->
@@ -57,10 +58,15 @@ class @Playlist
     $('.song').removeClass('song--playing')
     $(".song[data-order=#{@loadIndex()}]").addClass('song--playing')
 
+    timecodeInterval = setInterval ()=>
+      $('.control-bar__timecode').text(Math.floor(@audio.currentTime))
+
   pause: ->
     @audio.pause()
     $('body').removeClass('playing')
     $('.song').removeClass('song--playing')
+
+    clearInterval timecodeInterval
 
   shuffle: ->
     @shuffleOrder = []
