@@ -14,6 +14,7 @@ export default class Streamer {
 
         if (client)
           this.watchedSid = client.watchedSid
+          this.playOnce = true
       });
 
       Streamy.join(options.slug)
@@ -59,7 +60,7 @@ export default class Streamer {
         }
       });
 
-      Streamy.on('play', (data)=> {
+      let playFunc = (data)=> {
         if (data.__from === sid)
           return
 
@@ -96,11 +97,18 @@ export default class Streamer {
             onPlayThroughReady
           )
         }
-      });
+      }
+
+      Streamy.on('play', playFunc.bind(this))
 
       Streamy.on('timeupdate', (data)=> {
         if (data.__from === Streamy.id())
           return
+
+        if (this.playOnce) {
+          playFunc.call(this, data)
+          this.playOnce = false;
+        }
 
         $(`[data-sid="${data.__from}"]`).find('.time').text(data.currentTime)
       })
