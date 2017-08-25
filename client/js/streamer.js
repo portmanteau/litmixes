@@ -44,19 +44,24 @@ export default class Streamer {
         Streamy.rooms(options.slug).emit('pause', {})
       });
 
-      const onPlay = () => {
+      const onPlay = (event) => {
+        console.log('started playing')
+        console.log(event.target.currentTime)
+        if (event.target.currentTime === 0)
+          return
+
         Streamy.rooms(options.slug).emit('play', {
           "index": options.playlist.index,
           "currentTime": options.playlist.audio.currentTime,
           "localTime": Date.now()
         })
+
+        options.playlist.audio.removeEventListener("timeupdate", onPlay)
       }
 
-      options.playlist.audio.addEventListener("play", onPlay)
-      options.playlist.audio.addEventListener("canplaythrough", ()=> {
-        if (!this.watchedSid)
-          onPlay.apply(this, arguments)
-      });
+      options.playlist.audio.addEventListener("playing", ()=> {
+        options.playlist.audio.addEventListener("timeupdate", onPlay)
+      })
 
       Streamy.on('pause', (data)=> {
         if (data.__from === sid)
@@ -73,9 +78,10 @@ export default class Streamer {
         if (data.__from === Streamy.id())
           return
 
-        if (this.playOnce) {
-          this.playFunc.call(this, data)
-          this.playOnce = false;
+        if (data.__from === this.watchedSid) {
+          if (this.playOnce) {
+            this.playFunc.call(this, data)
+          }
         }
 
         $(`[data-sid="${data.__from}"]`).find('.time').text(data.currentTime)
@@ -96,6 +102,8 @@ export default class Streamer {
       return
 
     if (data.__from === this.watchedSid) {
+      this.playOnce = false;
+
       if (this.playlist.index !== data.index) {
         this.playlist.load(data.index)
       }
