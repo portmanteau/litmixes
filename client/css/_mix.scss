@@ -76,6 +76,11 @@ header.main-header {
     cursor: default;
     opacity: 1;
   }
+
+  .control-bar__timecode-active & {
+    cursor: default;
+    opacity: 1;
+  }
 }
 
 .mix__add-song-prompt {
