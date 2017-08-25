@@ -52,13 +52,14 @@
 
 .control-bar__timecode {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  top: 0;
+  right: 1em;
+  font-size: 2em;
 
   .control-bar__timecode-active & {
     font-size: 10rem;
-    bottom: auto;
     top: 0;
+    right: 0;
     width: 100%;
   }
 }
