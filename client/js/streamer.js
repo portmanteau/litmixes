@@ -1,3 +1,5 @@
+require("range-touch")
+
 // Override Meteor._debug to filter for custom msgs
 Meteor._debug = (function (super_meteor_debug) {
   return function (error, info) {
