@@ -92,8 +92,9 @@ export default class Streamer {
   playSync(options) {
     let currentTime = options.currentTime || this.playlist.audio.currentTime;
     let lag = options.lag || 0;
+    let browserLag =  navigator.userAgent.indexOf("Safari") > -1 ? 0.5 : 0;
 
-    this.playlist.audio.currentTime = currentTime + lag;
+    this.playlist.audio.currentTime = currentTime + lag + browserLag;
     this.playlist.play()
   }
 
