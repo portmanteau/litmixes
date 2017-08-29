@@ -44,11 +44,13 @@ export default class Streamer {
         Streamy.rooms(options.slug).emit('pause', {})
       });
 
-      const onPlay = (event) => {
-        console.log('started playing')
-        console.log(event.target.currentTime)
+      const emitPlay = (event) => {
         if (event.target.currentTime === 0)
           return
+
+        console.log('emitting play')
+        console.log('current time ' + event.target.currentTime)
+        console.log('local time ' + Date.now())
 
         Streamy.rooms(options.slug).emit('play', {
           "index": options.playlist.index,
@@ -56,11 +58,11 @@ export default class Streamer {
           "localTime": Date.now()
         })
 
-        options.playlist.audio.removeEventListener("timeupdate", onPlay)
+        options.playlist.audio.removeEventListener("timeupdate", emitPlay)
       }
 
       options.playlist.audio.addEventListener("playing", ()=> {
-        options.playlist.audio.addEventListener("timeupdate", onPlay)
+        options.playlist.audio.addEventListener("timeupdate", emitPlay)
       })
 
       Streamy.on('pause', (data)=> {
@@ -95,6 +97,15 @@ export default class Streamer {
     var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
 
     let browserLag =  isSafari ? 0.6 : 0.1;
+
+    if (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)) {
+      browserLag = 0.2;
+    }
+
+    console.log('received play request')
+    console.log('currentTime ' + currentTime)
+    console.log('lag ' + lag)
+    console.log('browserLag ' + browserLag)
 
     this.playlist.audio.currentTime = currentTime + lag + browserLag;
     this.playlist.play();
