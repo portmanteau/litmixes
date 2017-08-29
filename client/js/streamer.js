@@ -92,10 +92,12 @@ export default class Streamer {
   playSync(options) {
     let currentTime = options.currentTime || this.playlist.audio.currentTime;
     let lag = options.lag || 0;
-    let browserLag =  navigator.userAgent.indexOf("Safari") > -1 ? 0.6 : 0.25;
+    var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+
+    let browserLag =  isSafari ? 0.6 : 0.1;
 
     this.playlist.audio.currentTime = currentTime + lag + browserLag;
-    this.playlist.play()
+    this.playlist.play();
   }
 
   playFunc (data) {
@@ -114,20 +116,24 @@ export default class Streamer {
         lag: (Date.now() - Number(data.localTime))/1000
       })
 
-      var onPlayThroughReady = ()=> {
+      var onPlayThroughReady = (event)=> {
+        if (event.target.currentTime === 0) {
+          return;
+        }
+
         this.playSync({
           currentTime: data.currentTime,
           lag: (Date.now() - Number(data.localTime))/1000
         })
 
         this.playlist.audio.removeEventListener(
-          'canplaythrough',
+          'timeupdate',
           onPlayThroughReady
         )
       };
 
       this.playlist.audio.addEventListener(
-        'canplaythrough',
+        'timeupdate',
         onPlayThroughReady
       )
     }
