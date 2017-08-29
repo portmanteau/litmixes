@@ -1,5 +1,5 @@
 <template name="clients">
-  <div class="clients">
+  <div class="clients dankmode-only">
     {{#each clients }}
       {{#unless isSelf sid}}
         <div class="client {{ isWatchedClass sid }}" data-sid="{{ sid }}">
