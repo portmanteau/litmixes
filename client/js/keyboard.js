@@ -1,14 +1,16 @@
 Meteor.startup( () => {
   window.addEventListener('keydown', (event)=> {
     if(event.target.tagName === "INPUT")
-      return
+      return;
 
     if(event.code == "Space") {
-      playlist.playToggle()
+      playlist.playToggle();
     } else if(event.code == "ArrowRight") {
-      playlist.advance()
+      playlist.advance();
     } else if(event.code == "ArrowLeft") {
-      playlist.retreat()
+      playlist.retreat();
     }
+
+    event.preventDefault();
   });
 })
