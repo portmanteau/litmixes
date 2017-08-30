@@ -4,10 +4,13 @@
       Drop<br/>Files
     {{/unless}}
     {{#if mix.youtubeId }}
-      <div class="backgroundVideo">
-        {{> YTPlayer name="yes" }}
-      </div>
+      {{#unless mix.videoSrc }}
+        <div class="backgroundVideo">
+          {{> YTPlayer name="yes" }}
+        </div>
+      {{/unless}}
     {{/if}}
+    <video autoplay loop src={{ mix.videoSrc }}></video>
   </div>
   <div class="litmix litmix--active" data-js="drop">
     <header class="main-header">

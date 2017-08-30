@@ -16,9 +16,10 @@ setOrder = (order) ->
       console.log('updating')
 
 Meteor.methods
-  addImage: (data, url, slug) ->
-    fileName = data.fileName
+  addVideo: (url, slug) ->
+    Mixes.update({ slug: slug }, { $set: { videoSrc: url }})
 
+  addImage: (data, url, slug) ->
     Mixes.update({ slug: slug }, { $set: { backgroundUrl: url }})
 
   addSong: (data, url, slug) ->
