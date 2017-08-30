@@ -61,6 +61,12 @@ class @Playlist
     timecodeInterval = setInterval ()=>
       $('.control-bar__timecode').text(Math.floor(@audio.currentTime))
 
+  playToggle: ->
+    if ($('body').hasClass('playing'))
+      @pause()
+    else
+      @play()
+
   pause: ->
     @audio.pause()
     $('body').removeClass('playing')
