@@ -42,7 +42,7 @@ Meteor.methods
 
   deleteMp3: (song) ->
     if Meteor.isServer
-      Future = Npm.require('fibers/future')
+      Future = require('fibers/future')
       myFuture = new Future()
 
       unless song.fileName
@@ -105,7 +105,7 @@ Meteor.methods
 
   searchVideo: (search) ->
     if Meteor.isServer
-      Future = Npm.require('fibers/future')
+      Future = require('fibers/future')
       myFuture = new Future()
 
       YoutubeApi.search.list
@@ -120,8 +120,8 @@ Meteor.methods
 
   uploadVideo: (videoId, title, slug) ->
     if Meteor.isServer
-      ytdl = Npm.require('ytdl-core')
-      Future = Npm.require('fibers/future')
+      ytdl = require('ytdl-core')
+      Future = require('fibers/future')
       future = new Future()
       Readable = require("stream").Readable
       ytVideo = {}

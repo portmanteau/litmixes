@@ -35,11 +35,4 @@ Router.route "/:slug",
       if Meteor.isClient
         exports.droppables = exports.droppables || Droppable.initialize('[data-js=drop]')
         exports.playlist = exports.playlist || new Playlist()
-        mix = this.data().mix
-
-        SEO.set
-          title: "litmix.es/#{mix.slug}"
-          description: "A lit mix"
-          og:
-            image: mix.backgroundUrl
 
