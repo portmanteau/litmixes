@@ -6,16 +6,14 @@ onPageLoad(sink => {
   if (slugArray.length > 0) {
     slug = slugArray[1]
 
-    mix = Mixes.findOne({ slug: slug })
+    const mix = Mixes.findOne({ slug: slug })
+    const backgroundUrl = mix.backgroundUrl || "/space-sun-solar-flare-animation-8.gif"
 
-    console.log(mix)
-
-    sink.appendToHead(`<title>litmix.es/${slug} -- LitMixes</title>`)
-    sink.appendToHead(`<meta property="og:image" content="${mix.backgroundUrl}" />`)
-    sink.appendToHead(`<link rel="icon" href="${mix.backgroundUrl}"/>`)
+    sink.appendToHead(`<title>${slug}</title>`)
+    sink.appendToHead(`<meta property="og:image" content="${backgroundUrl}" />`)
+    sink.appendToHead(`<link rel="icon" href="${backgroundUrl}"/>`)
   } else {
     sink.appendToHead(`<title>LitMixes</title>`)
     sink.appendToHead(`<link rel="icon" href="/space-sun-solar-flare-animation-8.gif"/>`)
   }
 })
-

@@ -74,10 +74,11 @@ Template.mix.events
 
   'click .youtube-item__actions__background': (event, template) ->
     videoId = this.id.videoId
+    img = this.snippet.thumbnails.high.url
 
     Mixes.update(
       { _id: template.data.mix._id },
-      { $set: { youtubeId: videoId }}
+      { $set: { backgroundUrl: img, youtubeId: videoId }}
     )
 
   'mousemove .litmix': onAction
