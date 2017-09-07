@@ -1,4 +1,4 @@
-Template.mix.onCreated ->
+Template.mix.onRendered ->
   playerVars = {
     autoplay: 1,        # Auto-play the video on load
     controls: 0,        # Hide pause/play buttons in player
@@ -15,7 +15,7 @@ Template.mix.onCreated ->
   yt = new YTPlayer('yes', playerVars)
 
   Deps.autorun(()=>
-    data = Router.current().data()
+    data = Template.instance().data
 
     if data && data.mix
       yt_id = data.mix.youtubeId

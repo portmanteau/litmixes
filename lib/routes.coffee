@@ -31,15 +31,10 @@ Router.route "/:slug",
     ]
 
   onAfterAction: ->
-    if this.ready()
-      if Meteor.isClient
+    if this.ready() && Meteor.isClient
+      if this.data().mix
         exports.droppables = exports.droppables || Droppable.initialize('[data-js=drop]')
         exports.playlist = exports.playlist || new Playlist()
-        mix = this.data().mix
-
-        SEO.set
-          title: "litmix.es/#{mix.slug}"
-          description: "A lit mix"
-          og:
-            image: mix.backgroundUrl
-
+      else
+        alert("This mix does not exist!")
+        this.redirect('home', {}, { query: { s: this.params.slug }})
