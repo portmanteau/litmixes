@@ -31,8 +31,10 @@ Router.route "/:slug",
     ]
 
   onAfterAction: ->
-    if this.ready()
-      if Meteor.isClient
+    if this.ready() && Meteor.isClient
+      if this.data().mix
         exports.droppables = exports.droppables || Droppable.initialize('[data-js=drop]')
         exports.playlist = exports.playlist || new Playlist()
-
+      else
+        alert("This mix does not exist!")
+        this.redirect('home', {}, { query: { s: this.params.slug }})
