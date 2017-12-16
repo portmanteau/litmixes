@@ -33,8 +33,8 @@
          <i class="fa fa-plus"></i>
       </a>
       <div class="mix__add-song-prompt">
-        <input type="text" placeholder="Search Videos" value="{{search}}">
-        <div class="mix__results">
+        <input id="add-tracks" type="text" placeholder="Add Tracks (YT)" value="{{search}}">
+        <div class="mix__results inactive">
           {{#each searchResults}}
             <div class="youtube-item"  data-id="{{ id.videoId }}">
               <div class="youtube-item__thumbnail">
