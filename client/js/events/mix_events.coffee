@@ -1,5 +1,5 @@
 Template.mix.events
-  'focus #add-tracks': (event) ->
+  'keydown #add-tracks': (event) ->
     $('.mix__results').removeClass('inactive')
 
 
