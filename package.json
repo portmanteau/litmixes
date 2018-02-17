@@ -13,7 +13,7 @@
     "range-touch": "^1.0.0",
     "scroll-into-view": "^1.9.0",
     "smoothscroll-polyfill": "^0.3.6",
-    "ytdl-core": "^0.10.3"
+    "ytdl-core": "^0.20.1"
   },
   "engines": {
     "node": "6.9.3"
