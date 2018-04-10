@@ -12,7 +12,8 @@ class @Playlist
     $('.fa-step-forward').on('click', @advance.bind(this))
     $('.fa-step-backward').on('click', @retreat.bind(this))
 
-    @play()
+    if (window.location.search.indexOf("autoplay") > -1)
+      @play()
 
   advance: ->
     @index++
