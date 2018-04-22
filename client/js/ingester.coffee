@@ -51,6 +51,7 @@
           fileName: file.name
 
         Meteor.call('addImage', data, url, Router.current().data().mix.slug)
+
     else if file.type.match /mp3/ || file.type.match /m4a/
       jsmediatags.read(
         file,
@@ -65,7 +66,21 @@
       )
     else if file.type.match /audio/
       @_uploadFile(file).then (url) ->
+        data = {
+          tags:
+            album: ""
+            artist: ""
+            title: file.name
+            year: ""
+          fileName: file.name
+          url: url
+          slug: Router.current().data().mix.slug
+        }
         Meteor.call('addSong', data, url, Router.current().data().mix.slug)
+    else if file.type.match /video/
+      @_uploadFile(file).then (url) ->
+        Meteor.call('addVideo', url, Router.current().data().mix.slug)
+
 
   _uploadFile: (file) ->
     return new Promise (resolve, reject) ->

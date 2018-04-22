@@ -1,5 +1,8 @@
+import Streamer from  './streamer'
+timecodeInterval = null
+
 class @Playlist
-  constructor: ->
+  constructor: (options) ->
     @audio = $('audio')[0]
     @index = 0
     @_bindEvents()
@@ -8,6 +11,9 @@ class @Playlist
     $('.fa-play').on( 'click', @play.bind(this))
     $('.fa-step-forward').on('click', @advance.bind(this))
     $('.fa-step-backward').on('click', @retreat.bind(this))
+
+    if (window.location.search.indexOf("autoplay") > -1)
+      @play()
 
   advance: ->
     @index++
@@ -55,10 +61,21 @@ class @Playlist
     $('.song').removeClass('song--playing')
     $(".song[data-order=#{@loadIndex()}]").addClass('song--playing')
 
+    timecodeInterval = setInterval ()=>
+      $('.control-bar__timecode').text(Math.floor(@audio.currentTime))
+
+  playToggle: ->
+    if ($('body').hasClass('playing'))
+      @pause()
+    else
+      @play()
+
   pause: ->
     @audio.pause()
     $('body').removeClass('playing')
     $('.song').removeClass('song--playing')
+
+    clearInterval timecodeInterval
 
   shuffle: ->
     @shuffleOrder = []

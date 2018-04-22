@@ -32,6 +32,10 @@
     font-size: 1.5em;
     color: #EE4503;
   }
+
+  .fa-play {
+    color: lime;
+  }
 }
 
 .control-bar__random .control-bar {
@@ -48,4 +52,23 @@
   .fa-play {
     display: none;
   }
+}
+
+.control-bar__timecode {
+  position: fixed;
+  top: 0;
+  right: 1em;
+  font-size: 2em;
+
+  .control-bar__timecode-active & {
+    font-size: 10rem;
+    top: 0;
+    right: 0;
+    width: 100%;
+  }
+}
+
+#range {
+  width: 100%;
+  user-select: none;
 }

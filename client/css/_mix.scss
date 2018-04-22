@@ -70,9 +70,15 @@ header.main-header {
   background: rgba(0,0,0,0.4);
   cursor: none;
   opacity: 0;
+  overflow-x: hidden;
   transition: 0.2s opacity;
 
   &.litmix--active {
+    cursor: default;
+    opacity: 1;
+  }
+
+  .control-bar__timecode-active & {
     cursor: default;
     opacity: 1;
   }
@@ -121,5 +127,11 @@ header.main-header {
   > a {
     margin-right: 15px;
     color: cornflowerblue;
+  }
+}
+
+.mix__results {
+  &.inactive {
+    display: none
   }
 }

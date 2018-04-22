@@ -3,10 +3,9 @@
     {{#unless hasBackground }}
       Drop<br/>Files
     {{/unless}}
-    {{#if mix.youtubeId }}
-      <div class="backgroundVideo">
-        {{> YTPlayer name="yes" }}
-      </div>
+
+    {{#if mix.videoSrc }}
+      <video muted autoplay loop src={{ mix.videoSrc }}></video>
     {{/if}}
   </div>
   <div class="litmix litmix--active" data-js="drop">
@@ -34,10 +33,10 @@
          <i class="fa fa-plus"></i>
       </a>
       <div class="mix__add-song-prompt">
-        <input type="text" placeholder="Search Videos" value="{{search}}">
-        <div class="mix__results">
+        <input id="add-tracks" type="text" placeholder="Add Tracks (YT)" value="{{search}}">
+        <div class="mix__results inactive">
           {{#each searchResults}}
-            <div class="youtube-item" data-id="{{ id.videoId }}">
+            <div class="youtube-item"  data-id="{{ id.videoId }}">
               <div class="youtube-item__thumbnail">
                 <img src="{{ snippet.thumbnails.default.url }}"/>
               </div>
@@ -47,9 +46,9 @@
                 </div>
               </div>
               <div class="youtube-item__actions">
-                <a class="youtube-item__actions__background">
-                  Background <i class="fa fa-picture-o"></i>
-                </a>
+                <!-- <a class="youtube&#45;item__actions__background"> -->
+                <!--   Background <i class="fa fa&#45;picture&#45;o"></i> -->
+                <!-- </a> -->
                 <a class="youtube-item__actions__add">
                   Add <i class="fa fa-plus"></i>
                 </a>
@@ -60,6 +59,7 @@
       </div>
     </div>
 
+    {{> clients}}
     {{> progressBar}}
     {{>controlBar}}
   </div>

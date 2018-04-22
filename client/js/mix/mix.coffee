@@ -65,6 +65,8 @@ Template.mix.events
         block: "start"
       })
 
+
+
     setTimeout ->
       $('body').toggleClass('add-song-open')
       $('.mix__add-song-prompt input').focus()

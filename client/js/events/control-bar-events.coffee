@@ -7,3 +7,5 @@ Template.controlBar.events
     else
       playlist.unshuffle()
 
+  'click .control-bar__timecode': (event) ->
+    $('body').toggleClass('control-bar__timecode-active')

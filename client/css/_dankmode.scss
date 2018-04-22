@@ -1,0 +1,7 @@
+.dankmode-only {
+  display: none;
+
+  .dankmode & {
+    display: inherit;
+  }
+}

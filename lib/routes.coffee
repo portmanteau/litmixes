@@ -20,14 +20,19 @@ Router.route "/:slug",
   data: ->
     if this.ready()
       {
+        clients: Clients.find({})
         mix: Mixes.findOne()
         songs: Songs.find({})
+        session: Sessions.find({})
       }
 
   subscriptions: ->
     [
       Meteor.subscribe("mixes", this.params.slug)
       Meteor.subscribe("songs", this.params.slug)
+      Meteor.subscribe("sessions", this.params.slug)
+      Meteor.subscribe("rooms", this.params.slug)
+      Meteor.subscribe("clients")
     ]
 
   onAfterAction: ->
