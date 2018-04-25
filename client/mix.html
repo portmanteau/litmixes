@@ -6,6 +6,10 @@
 
     {{#if mix.videoSrc }}
       <video muted autoplay loop src={{ mix.videoSrc }}></video>
+    {{else}}
+      {{#if mix.youtubeId}}
+        <div id="player"></div>
+      {{/if}}
     {{/if}}
   </div>
   <div class="litmix litmix--active" data-js="drop">
@@ -46,9 +50,9 @@
                 </div>
               </div>
               <div class="youtube-item__actions">
-                <!-- <a class="youtube&#45;item__actions__background"> -->
-                <!--   Background <i class="fa fa&#45;picture&#45;o"></i> -->
-                <!-- </a> -->
+                <a class="youtube-item__actions__background">
+                  Background <i class="fa fa-picture-o"></i>
+                </a>
                 <a class="youtube-item__actions__add">
                   Add <i class="fa fa-plus"></i>
                 </a>

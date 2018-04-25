@@ -1,4 +1,4 @@
-import Streamer from  './streamer'
+import Streamer from './streamer'
 timecodeInterval = null
 
 class @Playlist
