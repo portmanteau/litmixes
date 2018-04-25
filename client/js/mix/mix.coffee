@@ -1,4 +1,4 @@
-import isMobile from 'ismobilejs'
+isMobile = require('ismobilejs')
 require("smoothscroll-polyfill").polyfill()
 
 Template.mix.onCreated ->
@@ -75,13 +75,13 @@ Template.mix.events
     event.preventDefault()
 
   'click .youtube-item__actions__background': (event, template) ->
-    videoId = this.id.videoId
-    img = this.snippet.thumbnails.high.url
+    options = {
+      mixId: template.data.mix._id
+      videoId: this.id.videoId
+      img: this.snippet.thumbnails.high.url
+    }
 
-    Mixes.update(
-      { _id: template.data.mix._id },
-      { $set: { backgroundUrl: img, youtubeId: videoId }}
-    )
+    Meteor.call "setYouTubeBackground", options
 
   'mousemove .litmix': onAction
   'keydown .litmix': onAction

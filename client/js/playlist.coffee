@@ -1,4 +1,4 @@
-import Streamer from  './streamer'
+import Streamer from './streamer'
 timecodeInterval = null
 
 class @Playlist
@@ -13,7 +13,9 @@ class @Playlist
     $('.fa-step-backward').on('click', @retreat.bind(this))
 
     if (window.location.search.indexOf("autoplay") > -1)
-      @play()
+      setTimeout(()=>
+        $('.control-bar .fa-play').click()
+      , 1000)
 
   advance: ->
     @index++
