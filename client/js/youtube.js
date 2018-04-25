@@ -1,5 +1,14 @@
 export default class YoutubeHelper {
+  constructor() {
+    this.videoId = new ReactiveVar()
+  }
+
+  setVideoId(videoId) {
+    this.videoId.set(videoId)
+  }
+
   initialize() {
+    var _this = this;
     var tag = document.createElement('script');
 
     tag.src = "https://www.youtube.com/iframe_api";
@@ -19,10 +28,19 @@ export default class YoutubeHelper {
       cc_load_policy: 0,  // Hide closed captions
       iv_load_policy: 3,  // Hide the Video Annotations
       autohide: 0,        // Hide video controls when playing
-      videoId: "M7lc1UVf-VE",
       events: {
         "onReady": function(event) {
-          event.target.playVideo()
+          let player = _this.player = event.target
+
+          Tracker.autorun(function() {
+            console.log('here')
+            let videoId = _this.videoId.get()
+
+            if (videoId) {
+              player.loadVideoById(videoId)
+              player.playVideo()
+            }
+          });
         }
       }
 
@@ -30,7 +48,7 @@ export default class YoutubeHelper {
 
     window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
       setTimeout( () => {
-        this.player = new YT.Player('player', playerVars);
+        new YT.Player('player', playerVars);
       }, 1000)
     }
   }

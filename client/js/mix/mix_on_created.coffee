@@ -14,12 +14,12 @@ Template.mix.onRendered ->
   yt = new YouTubeHelper()
   yt.initialize()
 
-  # Tracker.autorun(()=>
-  #   data = Router.current().data()
-  #
-  #   if data && data.mix && data.mix.youtubeId
-  #     yt.setVideoId(data.mix.youtubeId)
-  # )
+  Tracker.autorun(()=>
+    data = Router.current().data()
+
+    if data && data.mix && data.mix.youtubeId
+      yt.setVideoId(data.mix.youtubeId)
+  )
 
   # Deps.autorun(()=>
       # debugger
