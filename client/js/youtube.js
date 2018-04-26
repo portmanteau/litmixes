@@ -38,6 +38,7 @@ export default class YoutubeHelper {
 
             if (videoId) {
               player.loadVideoById(videoId)
+              player.mute()
               player.playVideo()
             }
           });
@@ -48,6 +49,7 @@ export default class YoutubeHelper {
 
             if (videoId) {
               _this.player.loadVideoById(videoId)
+              _this.player.mute()
               _this.player.playVideo()
             }
           }
