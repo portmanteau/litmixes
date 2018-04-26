@@ -20,16 +20,3 @@ Template.mix.onRendered ->
     if data && data.mix && data.mix.youtubeId
       yt.setVideoId(data.mix.youtubeId)
   )
-
-  # Deps.autorun(()=>
-      # debugger
-      #
-      # yt_id = data.mix.youtubeId
-      # yt.player.loadVideoById(yt_id)
-      # yt.player.mute()
-      #
-      # yt.player.addEventListener 'onStateChange', (event)=>
-      #   if event.data == YT.PlayerState.ENDED
-      #     yt.player.loadVideoById(yt_id)
-      #     yt.player.mute()
-  # )

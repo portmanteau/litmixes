@@ -41,6 +41,16 @@ export default class YoutubeHelper {
               player.playVideo()
             }
           });
+        },
+        "onStateChange": function(event) {
+          if (event.data === YT.PlayerState.ENDED) {
+            let videoId = _this.videoId.get()
+
+            if (videoId) {
+              _this.player.loadVideoById(videoId)
+              _this.player.playVideo()
+            }
+          }
         }
       }
 
