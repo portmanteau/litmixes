@@ -1,5 +1,6 @@
 export default class YoutubeHelper {
   constructor() {
+    this.isReady = new ReactiveVar()
     this.videoId = new ReactiveVar()
   }
 
@@ -28,12 +29,12 @@ export default class YoutubeHelper {
       cc_load_policy: 0,  // Hide closed captions
       iv_load_policy: 3,  // Hide the Video Annotations
       autohide: 0,        // Hide video controls when playing
+      start: 0,
       events: {
         "onReady": function(event) {
           let player = _this.player = event.target
 
           Tracker.autorun(function() {
-            console.log('here')
             let videoId = _this.videoId.get()
 
             if (videoId) {
