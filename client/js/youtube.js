@@ -59,9 +59,12 @@ export default class YoutubeHelper {
     };
 
     window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
-      setTimeout(() => {
-        new YT.Player('player', playerVars);
-      }, 5000);
+      const initYoutube = setInterval(() => {
+        if (document.getElementById('player')) {
+          new YT.Player('player', playerVars);
+          clearInterval(initYoutube);
+        }
+      }, 500);
     };
   }
 }
