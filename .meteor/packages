@@ -4,18 +4,18 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-base@1.1.0             # Packages every Meteor app needs to have
-mobile-experience@1.0.4       # Packages for a great mobile UX
-mongo@1.2.0                   # The database Meteor supports right now
+meteor-base@1.4.0             # Packages every Meteor app needs to have
+mobile-experience@1.0.5       # Packages for a great mobile UX
+mongo@1.6.0                   # The database Meteor supports right now
 blaze-html-templates    # Compile .html files into Meteor Blaze views
 reactive-var@1.0.11            # Reactive variable for tracker
 jquery@1.11.10                  # Helpful client-side library
-tracker@1.1.3                 # Meteor's client-side reactive programming library
+tracker@1.2.0                 # Meteor's client-side reactive programming library
 
-standard-minifier-css@1.3.4   # CSS minifier run for production mode
-standard-minifier-js@2.1.1    # JS minifier run for production mode
-es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.8.2              # Enable ECMAScript2015+ syntax in app code
+standard-minifier-css@1.5.2   # CSS minifier run for production mode
+standard-minifier-js@2.4.0    # JS minifier run for production mode
+es5-shim@4.8.0                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.12.3              # Enable ECMAScript2015+ syntax in app code
 
 insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
 fourseven:scss
@@ -25,10 +25,10 @@ iron:router
 edgee:slingshot
 matb33:collection-hooks
 renaldo:youtube-api
-reactive-dict@1.1.9
-shell-server@0.2.4
+reactive-dict@1.2.1
+shell-server@0.4.0
 eluck:aws-sdk
-check@1.2.5
+check@1.3.1
 spiderable
 meteortoys:allthings
 fish:ffmpeg
@@ -36,6 +36,8 @@ meteorhacks:picker
 yuukan:streamy
 hpx7:youtube-iframe-player
 fastclick@1.0.13
-dynamic-import
-server-render
+dynamic-import@0.5.0
+server-render@0.3.1
 yuukan:streamy-rooms
+underscore
+modules

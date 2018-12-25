@@ -6,6 +6,7 @@
     "push-config": "heroku config:set METEOR_SETTINGS=\"$(cat settings.production.json)\""
   },
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "babel-runtime": "^6.20.0",
     "fibers": "^2.0.0",
     "ismobilejs": "^0.4.1",
