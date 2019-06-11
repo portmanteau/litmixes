@@ -37,8 +37,15 @@ Meteor.methods
         slug: slug
 
       myFuture.return(
-        Songs.insert song
+        Songs.insert song, ->
+          songId = arguments[1].insertedId
+
+          if !!songId
+            Meteor.call('orderSongBottom', songId)
       )
+
+      if Meteor.isClient
+        playlist.shuffle()
 
       myFuture.wait()
 
