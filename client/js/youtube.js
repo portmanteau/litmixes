@@ -18,18 +18,20 @@ export default class YoutubeHelper {
 
     var player;
 
-    var playerVars = {
-      autoplay: 1, // Auto-play the video on load
-      controls: 0, // Hide pause/play buttons in player
-      showinfo: 0, // Hide the video title
-      modestbranding: 1, // Hide the Youtube Logo
-      playsinline: 1,
-      loop: 1, // Run the video in a loop
-      fs: 0, // Hide the full screen button
-      cc_load_policy: 0, // Hide closed captions
-      iv_load_policy: 3, // Hide the Video Annotations
-      autohide: 0, // Hide video controls when playing
-      start: 0,
+    var options = {
+      playerVars: {
+        autoplay: 0, // Auto-play the video on load
+        controls: 0, // Hide pause/play buttons in player
+        showinfo: 0, // Hide the video title
+        modestbranding: 1, // Hide the Youtube Logo
+        playsinline: 1,
+        loop: 1, // Run the video in a loop
+        fs: 0, // Hide the full screen button
+        cc_load_policy: 0, // Hide closed captions
+        iv_load_policy: 3, // Hide the Video Annotations
+        autohide: 1, // Hide video controls when playing
+        start: 0,
+      },
       events: {
         onReady: function(event) {
           let player = (_this.player = event.target);
@@ -61,7 +63,7 @@ export default class YoutubeHelper {
     window.onYouTubeIframeAPIReady = function onYouTubeIframeAPIReady() {
       const initYoutube = setInterval(() => {
         if (document.getElementById('player')) {
-          new YT.Player('player', playerVars);
+          new YT.Player('player', options);
           clearInterval(initYoutube);
         }
       }, 500);
