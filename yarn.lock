@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@babel/runtime@^7.2.0":
+  version "7.4.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
+  integrity sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 Base64@~0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/Base64/-/Base64-0.2.1.tgz#ba3a4230708e186705065e66babdd4c35cf60028"
@@ -270,11 +277,13 @@ ismobilejs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/ismobilejs/-/ismobilejs-0.4.1.tgz#1a5f126c70fed39c93da380fa62cbae5723e7dc2"
 
-m3u8stream@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/m3u8stream/-/m3u8stream-0.2.1.tgz#5a7385880bc126921a7fa6fcf63f75c9e99dff8f"
+m3u8stream@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/m3u8stream/-/m3u8stream-0.6.2.tgz#c2c62ddce88156d80378dd59be010c8b8e9d120b"
+  integrity sha512-WsuM2bd5pPN80xvfrB+1DZqr4M7+kJl8byi6+ZCy6cmVjEiHhmr/desN53Ngsa6Hs13kYumeVgT4wL0oIJ+v6g==
   dependencies:
-    miniget "^1.1.0"
+    miniget "^1.4.0"
+    sax "^1.2.4"
 
 meteor-node-stubs@^0.2.3:
   version "0.2.6"
@@ -311,9 +320,10 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-miniget@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/miniget/-/miniget-1.1.0.tgz#482168b255f4fb8fef3b43991d49a212a8923b17"
+miniget@^1.4.0:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/miniget/-/miniget-1.5.1.tgz#4f93840d5aaed21634cd12fd07d22f7d64e9d570"
+  integrity sha512-KJ3AyIVZ76QuWAq43BWjkK+jLdhxhy3s4tsdg9Je91+cIFkeOSW2VEj2lSeKw50CPu1eCCkSbiQEBKL36mpA5w==
 
 minimalistic-assert@^1.0.0:
   version "1.0.0"
@@ -409,6 +419,11 @@ regenerator-runtime@^0.10.0:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.3.tgz#8c4367a904b51ea62a908ac310bf99ff90a82a3e"
 
+regenerator-runtime@^0.13.2:
+  version "0.13.2"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.2.tgz#32e59c9a6fb9b1a4aff09b4930ca2d4477343447"
+  integrity sha512-S/TQAZJO+D3m9xeN1WTI8dLKBBiRgXBlTJvbWjCThHWZj9EvHK70Ff50/tYj2J/fvBY6JtFVwRuazHN2E7M9BA==
+
 ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
@@ -416,6 +431,11 @@ ripemd160@^1.0.0:
 sax@^1.1.3:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
+
+sax@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
+  integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
 
 scroll-into-view@^1.9.0:
   version "1.9.1"
@@ -475,11 +495,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-ytdl-core@^0.20.1:
-  version "0.20.1"
-  resolved "https://registry.yarnpkg.com/ytdl-core/-/ytdl-core-0.20.1.tgz#727f8a9b7907dc3eab766442081f88fabbb1b7d7"
+"ytdl-core@https://github.com/fent/node-ytdl-core":
+  version "0.29.2"
+  resolved "https://github.com/fent/node-ytdl-core#730aeadfdcfffa9eebc5e8af8a1cfe1a86ca9eba"
   dependencies:
     html-entities "^1.1.3"
-    m3u8stream "^0.2.1"
-    miniget "^1.1.0"
+    m3u8stream "^0.6.2"
+    miniget "^1.4.0"
     sax "^1.1.3"
