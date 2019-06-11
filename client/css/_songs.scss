@@ -1,5 +1,6 @@
 .songs {
   padding: 0.1em 0;
+  width: 100%;
 }
 
 .song-items {
@@ -8,10 +9,10 @@
 }
 
 .song {
-  align-items: center;
+  // align-items: center;
   // border-bottom: 1px solid #333;
-  display: flex;
-  justify-content: flex-start;
+  // display: flex;
+  // justify-content: flex-start;
   padding: 0.5em 1em;
   position: relative;
 

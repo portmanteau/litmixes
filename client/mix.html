@@ -24,42 +24,42 @@
       </div>
     </header>
     <!-- {{>playlist}} -->
-    <div class="songs">
+    <table class="songs">
       {{>songHeader}}
 
-      <div class="song-items">
+      <tbody class="song-items">
         {{#each songs}}
           {{>song}}
         {{/each}}
-      </div>
+      </tbody>
+    </table>
 
-      <a class="add-song" data-js="drop" data-destination="bottom">
-         <i class="fa fa-plus"></i>
-      </a>
-      <div class="mix__add-song-prompt">
-        <input id="add-tracks" type="text" placeholder="Add Tracks (YT)" value="{{search}}">
-        <div class="mix__results inactive">
-          {{#each searchResults}}
-            <div class="youtube-item"  data-id="{{ id.videoId }}">
-              <div class="youtube-item__thumbnail">
-                <img src="{{ snippet.thumbnails.default.url }}"/>
-              </div>
-              <div class="youtube-item__description">
-                <div class="youtube-item__title">
-                  {{ snippet.title }}
-                </div>
-              </div>
-              <div class="youtube-item__actions">
-                <a class="youtube-item__actions__background">
-                  Background <i class="fa fa-picture-o"></i>
-                </a>
-                <a class="youtube-item__actions__add">
-                  Add <i class="fa fa-plus"></i>
-                </a>
+    <a class="add-song" data-js="drop" data-destination="bottom">
+        <i class="fa fa-plus"></i>
+    </a>
+    <div class="mix__add-song-prompt">
+      <input id="add-tracks" type="text" placeholder="Add Tracks (YT)" value="{{search}}">
+      <div class="mix__results inactive">
+        {{#each searchResults}}
+          <div class="youtube-item"  data-id="{{ id.videoId }}">
+            <div class="youtube-item__thumbnail">
+              <img src="{{ snippet.thumbnails.default.url }}"/>
+            </div>
+            <div class="youtube-item__description">
+              <div class="youtube-item__title">
+                {{ snippet.title }}
               </div>
             </div>
-          {{/each}}
-        </div>
+            <div class="youtube-item__actions">
+              <a class="youtube-item__actions__background">
+                Background <i class="fa fa-picture-o"></i>
+              </a>
+              <a class="youtube-item__actions__add">
+                Add <i class="fa fa-plus"></i>
+              </a>
+            </div>
+          </div>
+        {{/each}}
       </div>
     </div>
 

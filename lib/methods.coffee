@@ -37,10 +37,18 @@ Meteor.methods
         slug: slug
 
       myFuture.return(
-        Songs.insert song
+        Songs.insert(song, () =>
+          songId = arguments[1].insertedId
+
+          if !!songId
+            Meteor.call('orderSongBottom', songId)
+        )
       )
 
       myFuture.wait()
+
+      if Meteor.isClient
+        playlist.shuffle()
 
   updateSongUrl: (songId, url) ->
     Songs.update { _id: songId }, { $set: {url: url} }
