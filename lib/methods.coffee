@@ -27,6 +27,8 @@ Meteor.methods
       Future = require('fibers/future')
       myFuture = new Future()
 
+      count = Songs.find({ slug: slug }).count()
+
       song =
         album: data.tags.album
         artist: data.tags.artist
@@ -35,13 +37,11 @@ Meteor.methods
         year: data.tags.year
         url: url
         slug: slug
+        order: count
+
 
       myFuture.return(
-        Songs.insert song, ->
-          songId = arguments[1].insertedId
-
-          if !!songId
-            Meteor.call('orderSongBottom', songId)
+        Songs.insert song
       )
 
       if Meteor.isClient
