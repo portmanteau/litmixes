@@ -1,4 +1,3 @@
-
 header.main-header {
   display: block;
   font-size: 1.3em;
@@ -28,7 +27,7 @@ header.main-header {
 
   button#play-mix {
     background: white;
-    color: #7E0208;
+    color: #7e0208;
     display: none;
     border-radius: 100%;
     font-size: 1.8em;
@@ -50,16 +49,18 @@ header.main-header {
 }
 
 .backdrop {
+  align-items: center;
   background-position: center;
   background-repeat: repeat;
   background-size: cover;
   color: #111;
   display: flex;
-  font-family: "Press Start 2p";
+  font-family: 'Press Start 2p';
   font-size: 17vw;
   height: 100%;
+  height: calc(100vh + 80px);
   justify-content: center;
-  align-items: center;
+  margin-top: -40px;
   position: fixed;
   text-align: center;
   width: 100%;
@@ -67,7 +68,7 @@ header.main-header {
 }
 
 .litmix {
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
   cursor: none;
   opacity: 0;
   overflow-x: hidden;
@@ -132,7 +133,7 @@ header.main-header {
 
 .mix__results {
   &.inactive {
-    display: none
+    display: none;
   }
 }
 

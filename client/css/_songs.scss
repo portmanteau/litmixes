@@ -64,10 +64,11 @@
 .song__title,
 .song__artist,
 .song__album {
-  width: 30%;
   overflow: hidden;
+  padding-left: 5px;
   text-overflow: ellipsis;
   white-space: nowrap;
+  width: 30%;
 
   @media screen and (max-width: 660px) {
     width: 90%;
