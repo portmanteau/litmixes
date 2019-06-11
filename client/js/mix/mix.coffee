@@ -65,8 +65,6 @@ Template.mix.events
         block: "start"
       })
 
-
-
     setTimeout ->
       $('body').toggleClass('add-song-open')
       $('.mix__add-song-prompt input').focus()
@@ -87,37 +85,23 @@ Template.mix.events
   'keydown .litmix': onAction
 
   'click .youtube-item__actions__add': (event, template) ->
-    $loader = $(event.target)
     videoId = this.id.videoId
     title = this.snippet.title
     slug = template.data.mix.slug
 
-    cachedHTML = $loader.html()
+    songData =
+      tags:
+        title: title
 
-    $loader.html("Loading...")
+    Meteor.call('addSong', songData, null, slug, (err, songId) =>
+      Meteor.call('uploadVideo', videoId, songId, title, slug, (err, resp) =>
+        if err
+          # Remove song
+          console.log(err)
+          alert(err.message)
+          return
 
-    $('.progress-text').text("Loading...")
-    $('.progress').addClass('progress--active')
-
-    Streamy.on 'uploadPercentage', (data) ->
-      if data.slug == slug
-        $('.progress-bar').height("#{data.percent}%")
-        $('.progress-text').html("#{data.message} <br/> #{data.percent}%")
-
-    Meteor.call('uploadVideo', this.id.videoId, title, slug, (err, resp) ->
-      $loader.html(cachedHTML)
-      Streamy.off('uploadPercentage')
-      $('.progress').removeClass('progress--active')
-
-      if err
-        console.log(err)
-        alert(err.message)
-        return
-
-      data =
-        tags:
-          title: title
-
-      Meteor.call('addSong', data, resp.Location, slug)
+        Meteor.call('updateSongUrl', songId , resp.Location)
+      )
     )
 

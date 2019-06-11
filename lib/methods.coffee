@@ -23,23 +23,27 @@ Meteor.methods
     Mixes.update({ slug: slug }, { $set: { backgroundUrl: url }})
 
   addSong: (data, url, slug) ->
-    song =
-      album: data.tags.album
-      artist: data.tags.artist
-      fileName: data.fileName
-      title: data.tags.title
-      year: data.tags.year
-      url: url
-      slug: slug
+    if Meteor.isServer
+      Future = require('fibers/future')
+      myFuture = new Future()
 
-    Songs.upsert song, song, ->
-      songId = arguments[1].insertedId
+      song =
+        album: data.tags.album
+        artist: data.tags.artist
+        fileName: data.fileName
+        title: data.tags.title
+        year: data.tags.year
+        url: url
+        slug: slug
 
-      if !!songId
-        Meteor.call('orderSongBottom', songId)
+      myFuture.return(
+        Songs.insert song
+      )
 
-      if Meteor.isClient
-        playlist.shuffle()
+      myFuture.wait()
+
+  updateSongUrl: (songId, url) ->
+    Songs.update { _id: songId }, { $set: {url: url} }
 
   deleteMp3: (song) ->
     if Meteor.isServer
@@ -56,7 +60,6 @@ Meteor.methods
       options =
         Bucket: Meteor.settings.bucketName
         Key: song.slug + "/" + song.fileName
-
 
       s3.deleteObject options, (err, data) =>
         if (err)
@@ -115,11 +118,14 @@ Meteor.methods
         maxResults: 5,
         q: search,
       , (err, data) ->
-        myFuture.return(data)
+        if (err)
+          myFuture.return(err)
+        else
+          myFuture.return(data)
 
       myFuture.wait()
 
-  uploadVideo: (videoId, title, slug) ->
+  uploadVideo: (videoId, songId, title, slug) ->
     if Meteor.isServer
       ytdl = require('ytdl-core')
       Future = require('fibers/future')
@@ -140,13 +146,14 @@ Meteor.methods
         console.log(data)
         percent = Math.floor(
           100*(Number(data.loaded)/Number(data.total))
-        )
+       )
         console.log(percent)
 
         Streamy.broadcast(
           'uploadPercentage', {
             message: progress.message
             percent: percent
+            songId: songId
             slug: slug
           }
         )
@@ -211,7 +218,7 @@ Meteor.methods
         progress = {
           loaded: progress.loaded
           total: ytVideo.totalBytes
-          message: "Uploading Video"
+          message: "Uploading Audio"
         }
 
         if progress.loaded && ytVideo.totalBytes

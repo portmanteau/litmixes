@@ -40,6 +40,12 @@ Router.route "/:slug",
       if this.data().mix
         exports.droppables = exports.droppables || Droppable.initialize('[data-js=drop]')
         exports.playlist = exports.playlist || new Playlist()
+
+        Streamy.on 'uploadPercentage', (data) =>
+          if data.slug == this.data().mix.slug
+            element = $("[data-id=#{data.songId}]")
+            element.find('.progress-bar').width("#{data.percent}%")
+            element.find('.progress-text').html("#{data.message} #{data.percent}%")
       else
         alert("This mix does not exist!")
         this.redirect('home', {}, { query: { s: this.params.slug }})

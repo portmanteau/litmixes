@@ -1,7 +1,7 @@
 <template name="song">
   <div data-id="{{_id}}"
     data-order="{{order}}"
-    class="song real-song"
+    class="song real-song loaded--{{hasUrl}}"
     data-js="drop"
     draggable="true"
     style="order: {{order}}">
@@ -26,5 +26,6 @@
       <a href="{{url}}"><i class="fa fa-download song__download"></i></a>
       <a><i class="fa fa-trash song__remove"></i></a>
     </div>
+    {{> progressBar}}
   </div>
 </template>
