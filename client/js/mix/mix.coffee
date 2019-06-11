@@ -84,9 +84,9 @@ Template.mix.events
   'mousemove .litmix': onAction
   'keydown .litmix': onAction
 
-  'click .fa-plus': (event, template) ->
-    videoId = "BZP1rYjoBgI" # this.id.videoId
-    title = "hi" # this.snippet.title
+  'click .youtube-item__actions__add': (event, template) ->
+    videoId = this.id.videoId
+    title = this.snippet.title
     slug = template.data.mix.slug
 
     songData =
