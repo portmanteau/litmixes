@@ -133,6 +133,8 @@ this.Playlist = class Playlist {
   }
 
   _toCloudfront(url) {
+    if (!url) return '';
+
     let cloudFrontDistribution = Meteor.settings.public.cloudFrontDistribution;
 
     if (!cloudFrontDistribution) {

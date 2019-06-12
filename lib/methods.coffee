@@ -27,7 +27,7 @@ Meteor.methods
       Future = require('fibers/future')
       myFuture = new Future()
 
-      count = Songs.find({ slug: slug }).count()
+      count = Songs.find({ slug: slug }).count() + 1
 
       song =
         album: data.tags.album
@@ -48,9 +48,6 @@ Meteor.methods
         playlist.shuffle()
 
       myFuture.wait()
-
-  updateSongUrl: (songId, url) ->
-    Songs.update { _id: songId }, { $set: {url: url} }
 
   deleteMp3: (song) ->
     if Meteor.isServer
@@ -122,7 +119,7 @@ Meteor.methods
       youTube = new YouTube()
       youTube.setKey(Meteor.settings.google)
 
-      youTube.search search, 4, (error, result) ->
+      youTube.search search, 10, (error, result) ->
         if (error)
           myFuture.return(error)
         else
@@ -208,13 +205,16 @@ Meteor.methods
           Key: slug + "/" + title + ".mp3"
           Body: mp3Stream
 
-      uploadStream.send (err, data) ->
+      uploadStream.send Meteor.bindEnvironment((err, data) ->
         if err
+          # remove song
           console.error err
         else
           console.log data
+          Songs.update { _id: songId }, { $set: {url: data.Location} }
 
         future.return(data)
+      )
 
       uploadStream.on 'httpUploadProgress', (progress) =>
         console.log('uploadEvent')

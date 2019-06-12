@@ -96,12 +96,9 @@ Template.mix.events
     Meteor.call('addSong', songData, null, slug, (err, songId) =>
       Meteor.call('uploadVideo', videoId, songId, title, slug, (err, resp) =>
         if err
-          # Remove song
           console.log(err)
           alert(err.message)
           return
-
-        Meteor.call('updateSongUrl', songId , resp.Location)
       )
     )
 
