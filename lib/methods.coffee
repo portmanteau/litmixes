@@ -118,17 +118,16 @@ Meteor.methods
     if Meteor.isServer
       Future = require('fibers/future')
       myFuture = new Future()
+      YouTube = require("youtube-node")
+      youTube = new YouTube()
+      youTube.setKey(Meteor.settings.google)
 
-      YoutubeApi.search.list
-        part: "snippet",
-        type: "video",
-        maxResults: 5,
-        q: search,
-      , (err, data) ->
-        if (err)
-          myFuture.return(err)
+      youTube.search search, 4, (error, result) ->
+        if (error)
+          myFuture.return(error)
         else
-          myFuture.return(data)
+          console.log(result)
+          myFuture.return(result)
 
       myFuture.wait()
 

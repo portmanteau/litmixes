@@ -24,7 +24,6 @@ coffeescript
 iron:router
 edgee:slingshot
 matb33:collection-hooks
-renaldo:youtube-api
 reactive-dict@1.2.1
 shell-server@0.4.0
 eluck:aws-sdk
