@@ -36,8 +36,8 @@
       <a class="add-song" data-js="drop" data-destination="bottom">
          <i class="fa fa-plus"></i>
       </a>
-      <div class="mix__add-song-prompt">
-        <input id="add-tracks" type="text" placeholder="Add Tracks (YT)" value="{{search}}">
+      <form class="mix__add-song-prompt">
+        <input id="add-tracks" name="search" type="text" placeholder="Add Tracks (YT)" value="{{search}}">
         <div class="mix__results inactive">
           {{#each searchResults}}
             <div class="youtube-item"  data-id="{{ id.videoId }}">
@@ -60,7 +60,7 @@
             </div>
           {{/each}}
         </div>
-      </div>
+      </form>
     </div>
 
     {{> clients}}

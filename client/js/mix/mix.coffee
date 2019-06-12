@@ -5,9 +5,10 @@ Template.mix.onCreated ->
   search = this.search = new ReactiveDict()
 
   Deps.autorun ->
-    Meteor.call 'searchVideo', search.get('query'), (err, response) ->
-      console.log(response)
-      search.set('results', response.items)
+    if search.get('query')
+      Meteor.call 'searchVideo', search.get('query'), (err, response) ->
+        console.log(response)
+        search.set('results', response.items)
 
 Template.mix.helpers
   search: ->
@@ -30,14 +31,12 @@ Template.mix.events
 
     event.preventDefault()
 
-  'keyup .mix__add-song-prompt input[type=text]': (event, template) ->
-    clearTimeout(keyBounce)
+  'submit .mix__add-song-prompt': (event, template) ->
+    event.preventDefault()
 
-    keyBounce = setTimeout ->
-      value = event.target.value
-      search = template.search
-      search.set('query', value)
-    , 500
+    value = event.target[0].value
+    search = template.search
+    search.set('query', value)
 
   'click .add-song': (event) ->
     $prompt = $('.mix__add-song-prompt')
@@ -50,7 +49,6 @@ Template.mix.events
         $prompt.css('display', 'none')
 
     else
-      debugger
       ScreenController.lock()
       $prompt.css('display', 'block')
 
