@@ -1,5 +1,5 @@
-isMobile = require('ismobilejs')
 require("smoothscroll-polyfill").polyfill()
+ScreenController = require('/client/js/screen_controller').default
 
 Template.mix.onCreated ->
   search = this.search = new ReactiveDict()
@@ -17,17 +17,6 @@ Template.mix.helpers
     results = Template.instance().search.get('results')
 
 keyBounce = null
-mouseBounce = null
-
-onAction = ->
-  clearTimeout(mouseBounce)
-
-  $('.litmix').addClass('litmix--active')
-
-  mouseBounce = setTimeout( ->
-    unless isMobile.any
-      $('.litmix').removeClass('litmix--active')
-  , 3000)
 
 Template.mix.events
   'click .fa-question': ->
@@ -54,10 +43,15 @@ Template.mix.events
     $prompt = $('.mix__add-song-prompt')
 
     if $('body').hasClass('add-song-open')
+      ScreenController.unlock()
+      ScreenController.onAction()
+
       $prompt.one 'transitionend', ->
         $prompt.css('display', 'none')
 
     else
+      debugger
+      ScreenController.lock()
       $prompt.css('display', 'block')
 
       event.currentTarget.scrollIntoView({
@@ -81,8 +75,7 @@ Template.mix.events
 
     Meteor.call "setYouTubeBackground", options
 
-  'mousemove .litmix': onAction
-  'keydown .litmix': onAction
+  'mousemove .litmix': ScreenController.onAction
 
   'click .youtube-item__actions__add': (event, template) ->
     videoId = this.id.videoId
