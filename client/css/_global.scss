@@ -6,14 +6,11 @@
 body {
   background-color: black;
   color: white;
-  font-family: "Anonymous Pro";
+  font-family: 'Anonymous Pro';
   line-height: 1.5;
   min-height: 100vh;
-  text-shadow:
-   -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 a {
@@ -29,28 +26,29 @@ h1 {
   font-size: 1em;
 }
 
-input[type=text] {
+input[type='text'] {
   background: transparent;
   color: white;
   padding: 0.5em;
   width: 100%;
-  text-shadow:
-   -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-     1px 1px 0 #000;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
-::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
   color: white;
 }
-::-moz-placeholder { /* Firefox 19+ */
+::-moz-placeholder {
+  /* Firefox 19+ */
   color: white;
 }
-:-ms-input-placeholder { /* IE 10+ */
+:-ms-input-placeholder {
+  /* IE 10+ */
   color: white;
 }
-:-moz-placeholder { /* Firefox 18- */
+:-moz-placeholder {
+  /* Firefox 18- */
   color: white;
 }
 
@@ -58,10 +56,10 @@ input {
   -webkit-user-select: auto;
 }
 
-input[type="submit"] {
+.lite-it-up {
   // background: url("flame_block_e0.gif");
   background-color: transparent;
-  background-image: url("coollogo_com-22009629.gif");
+  background-image: url('coollogo_com-22009629.gif');
   border: none;
   background-size: contain;
   color: transparent;

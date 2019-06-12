@@ -83,6 +83,17 @@ header.main-header {
   }
 }
 
+.mix__search-container {
+  display: flex;
+  font-size: 1.5em;
+}
+
+.mix__search {
+  padding: 5px 40px;
+  background: transparent;
+  color: white;
+}
+
 .mix__add-song-prompt {
   // -webkit-filter: blur(20px);
   display: none;
