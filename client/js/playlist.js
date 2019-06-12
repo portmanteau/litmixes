@@ -48,13 +48,18 @@ this.Playlist = class Playlist {
     }
 
     try {
-      this.audio.src = Songs.findOne({order: this.loadIndex()}).url;
+      let song = Songs.findOne({order: this.loadIndex()});
+      let url = song.url;
+      let cloudfrontUrl = this._toCloudfront(url);
+
+      this.audio.src = cloudfrontUrl;
     } catch (error) {
       if (this.index < Songs.find().count()) {
         this.index++;
       } else {
-        this.shuffle();
-        this.index = 0;
+        if (Songs.find().count() > 0) {
+          return alert(`Error: ${error}`);
+        }
       }
 
       return this.load(this.index);
@@ -100,6 +105,7 @@ this.Playlist = class Playlist {
   shuffle() {
     let index;
     this.shuffleOrder = [];
+
     const standardOrder = Array.apply(null, Array(Songs.find().count())).map(
       (_undef, index) => {
         return index;
@@ -124,5 +130,18 @@ this.Playlist = class Playlist {
 
   _bindEvents() {
     return this.audio.addEventListener('ended', this.advance.bind(this), false);
+  }
+
+  _toCloudfront(url) {
+    let cloudFrontDistribution = Meteor.settings.public.cloudFrontDistribution;
+
+    if (!cloudFrontDistribution) {
+      return url;
+    }
+
+    let regex = /\w+:\/\/([^\/]+)/;
+    let host = url.match(regex)[1];
+
+    return url.replace(host, `${cloudFrontDistribution}.cloudfront.net`);
   }
 };
