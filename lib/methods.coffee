@@ -118,6 +118,7 @@ Meteor.methods
       YouTube = require("youtube-node")
       youTube = new YouTube()
       youTube.setKey(Meteor.settings.google)
+      youTube.addParam('type', 'video')
 
       youTube.search search, 10, (error, result) ->
         if (error)
@@ -131,8 +132,6 @@ Meteor.methods
   uploadVideo: (videoId, songId, title, slug) ->
     if Meteor.isServer
       ytdl = require('ytdl-core')
-      Future = require('fibers/future')
-      future = new Future()
       Readable = require("stream").Readable
       ytVideo = {}
 
@@ -168,7 +167,7 @@ Meteor.methods
 
       ytStream.on 'error', (err)=>
         console.error(err)
-        future.throw(new Error(err))
+        Songs.remove { _id: songId }
 
       ytStream.on 'progress', (event) =>
         console.log('ytProgress')
@@ -180,6 +179,7 @@ Meteor.methods
       mp3Stream = ffmpeg({source: ytStream})
         .on 'error', (err) ->
           console.log('An error occurred: ' + err.message)
+          Songs.remove { _id: songId }
         .on 'end', ->
           console.log('Processing finished!')
         .on 'progress', (event) ->
@@ -208,12 +208,11 @@ Meteor.methods
       uploadStream.send Meteor.bindEnvironment((err, data) ->
         if err
           # remove song
+          Songs.remove { _id: songId }
           console.error err
         else
           console.log data
           Songs.update { _id: songId }, { $set: {url: data.Location} }
-
-        future.return(data)
       )
 
       uploadStream.on 'httpUploadProgress', (progress) =>
@@ -229,6 +228,3 @@ Meteor.methods
 
         if progress.loaded && ytVideo.totalBytes
           progressFunction(progress)
-
-      future.wait()
-
