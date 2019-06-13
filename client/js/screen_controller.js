@@ -4,6 +4,8 @@ let mouseBounce = null;
 class ScreenController {
   constructor() {
     this.locked = false;
+    this.bindEvents();
+    this.onAction();
   }
 
   onAction = event => {
@@ -24,6 +26,11 @@ class ScreenController {
 
   lock() {
     this.locked = true;
+  }
+
+  bindEvents() {
+    $('body').on('mousemove scroll', this.onAction);
+    $('*').on('dragover', this.onAction);
   }
 }
 

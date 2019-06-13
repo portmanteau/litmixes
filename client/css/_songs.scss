@@ -14,6 +14,11 @@
   justify-content: flex-start;
   padding: 0.5em 1em;
   position: relative;
+  border-bottom: 1px solid transparent;
+
+  &.dragover {
+    border-bottom-color: blue;
+  }
 
   .fa-volume-up {
     display: none;
@@ -97,7 +102,10 @@
   font-size: 0.9em;
 
   @media screen and (max-width: 660px) {
-    display: none;
+    .song__artist,
+    .song__album {
+      display: none;
+    }
   }
 }
 

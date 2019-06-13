@@ -10,7 +10,7 @@ setOrder = (order) ->
     console.log "setting #{id} to #{index}"
 
     if Meteor.isClient
-      $(".song[data-id='#{id}'").css 'order', index
+      $(".song[data-id='#{id}']").css 'order', index
 
     Songs.update { _id: id}, {$set: {order: index}}, ->
       console.log('updating')

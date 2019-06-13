@@ -73,8 +73,6 @@ Template.mix.events
 
     Meteor.call "setYouTubeBackground", options
 
-  'mousemove .litmix': ScreenController.onAction
-
   'click .youtube-item__actions__add': (event, template) ->
     videoId = this.id.videoId
     title = this.snippet.title
