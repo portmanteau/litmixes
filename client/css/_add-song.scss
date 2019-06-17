@@ -5,14 +5,14 @@
 
   & .fa-plus {
     // color: #EE4503;
-    color: lime;
+    color: #00f280;
     transition: 0.5s all;
     font-size: 2em;
   }
 
   .add-song-open & .fa-plus {
     transform: rotate(45deg);
-    color: #EE4503;
+    color: #ee4503;
   }
 }
 
@@ -22,7 +22,7 @@
 }
 
 .add-song:hover {
-  background: rgba(50,50,50,0.5);
+  background: rgba(50, 50, 50, 0.5);
   cursor: pointer;
   text-decoration: none;
 }
@@ -31,4 +31,3 @@
   background: white;
   color: black;
 }
-

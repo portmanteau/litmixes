@@ -2,3 +2,4 @@ node_modules/
 settings.json
 settings.production.json
 npm-debug.log
+tags

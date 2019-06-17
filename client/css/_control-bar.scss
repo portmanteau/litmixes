@@ -2,7 +2,7 @@
   // background-color: rgba(0,0,0,0.5);
   // border-top: 1px solid black;
   bottom: 0;
-  color: white;
+  color: #fdd656;
   font-size: 1.3em;
   left: 0;
   padding: 1em;
@@ -28,13 +28,14 @@
 }
 
 .control-bar {
-  .fa-play, .fa-pause {
+  .fa-play,
+  .fa-pause {
     font-size: 1.5em;
-    color: #EE4503;
+    color: #ee4503;
   }
 
   .fa-play {
-    color: lime;
+    color: #00f280;
   }
 }
 
