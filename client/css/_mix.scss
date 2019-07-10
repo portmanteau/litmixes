@@ -88,10 +88,16 @@ header.main-header {
   font-size: 1.25em;
 }
 
+#add-tracks {
+  border: 3px solid white;
+  border-right: none;
+}
+
 .mix__search {
-  padding: 5px 40px;
   background: transparent;
+  border: 3px solid white;
   color: white;
+  padding: 5px 40px;
 }
 
 .mix__add-song-prompt {

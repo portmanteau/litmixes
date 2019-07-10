@@ -41,6 +41,10 @@
           <input id="add-tracks" name="search" type="text" placeholder="Add Tracks (YT)" value="{{search}}">
           <input class="mix__search" type="submit" value="search">
         </div>
+        <p style="text-align: center">
+          Search <span style="color: cornflowerblue">YouTube</span> above or
+          <span style="color: cornflowerblue">drop files</span> directly onto the page.
+        </p>
         <div class="mix__results inactive">
           {{#each searchResults}}
             <div class="youtube-item"  data-id="{{ id.videoId }}">

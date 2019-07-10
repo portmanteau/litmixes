@@ -5,7 +5,7 @@
 
 body {
   background-color: black;
-  color: #fdd656;
+  color: $primary-font-color;
   font-family: 'Futura';
   line-height: 1.5;
   min-height: 100vh;
@@ -14,7 +14,7 @@ body {
 }
 
 a {
-  color: #fdd656;
+  color: $primary-font-color;
   cursor: pointer;
 }
 
