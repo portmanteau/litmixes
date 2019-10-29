@@ -124,7 +124,7 @@ Meteor.methods
         if (error)
           myFuture.return(error)
         else
-          console.log(result)
+          # console.log(result)
           myFuture.return(result)
 
       myFuture.wait()
@@ -136,20 +136,9 @@ Meteor.methods
       ytVideo = {}
 
       progressFunction = (progress) ->
-        data = {
-          loaded: 1,
-          total: 100,
-          message: "Loading...",
-          slug: slug
-        }
-
-        _.extend(data, progress)
-
-        console.log(data)
         percent = Math.floor(
-          100*(Number(data.loaded)/Number(data.total))
-       )
-        console.log(percent)
+          100*(Number(progress.loaded)/Number(progress.total))
+        )
 
         Streamy.broadcast(
           'uploadPercentage', {
@@ -170,11 +159,14 @@ Meteor.methods
         Songs.remove { _id: songId }
 
       ytStream.on 'progress', (event) =>
-        console.log('ytProgress')
-        console.log(event)
+        # console.log('ytProgress')
+        # console.log(event)
 
       ytStream.on 'info', (event) =>
-        ytVideo.length_seconds = event.length_seconds
+        console.log("Info")
+        # console.log(event)
+        ytVideo.length_seconds = event.player_response.videoDetails.lengthSeconds
+        # console.log(ytVideo)
 
       mp3Stream = ffmpeg({source: ytStream})
         .on 'error', (err) ->
@@ -183,15 +175,25 @@ Meteor.methods
         .on 'end', ->
           console.log('Processing finished!')
         .on 'progress', (event) ->
-          console.log('mp3Event')
-          console.log(event)
-          loadedSeconds = event.timemark.split(':')[1]*60
+          # console.log('mp3Event')
+          # console.log(event)
+          times = event.timemark.split(':')
+          loadedSeconds = parseInt(times[2])
+          loadedSeconds += parseInt(times[1] * 60)
+          loadedSeconds += parseInt(times[0]) * 60 * 60
+
+          console.log(times)
+          console.log(loadedSeconds)
           totalSeconds = ytVideo.length_seconds
           progress = {
             loaded: loadedSeconds
             total: totalSeconds
+            percent: loadedSeconds/totalSeconds * 100
             message: "Compressing Audio"
           }
+
+          # console.log("here")
+          console.log(event)
 
           progressFunction(progress)
         .audioCodec('libmp3lame')
@@ -211,12 +213,12 @@ Meteor.methods
           Songs.remove { _id: songId }
           console.error err
         else
-          console.log data
+          # console.log data
           Songs.update { _id: songId }, { $set: {url: data.Location} }
       )
 
       uploadStream.on 'httpUploadProgress', (progress) =>
-        console.log('uploadEvent')
+        # console.log('uploadEvent')
         if progress.total
           ytVideo.totalBytes = progress.total
 
