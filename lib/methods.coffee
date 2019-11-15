@@ -135,6 +135,7 @@ Meteor.methods
       Readable = require("stream").Readable
       ytVideo = {}
 
+
       progressFunction = (progress) ->
         percent = Math.floor(
           100*(Number(progress.loaded)/Number(progress.total))
