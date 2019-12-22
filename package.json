@@ -8,7 +8,7 @@
   "dependencies": {
     "@babel/runtime": "^7.2.0",
     "babel-runtime": "^6.20.0",
-    "fibers": "^2.0.0",
+    "fibers": "4",
     "ismobilejs": "^0.4.1",
     "meteor-node-stubs": "^0.2.3",
     "range-touch": "^1.0.0",
@@ -18,6 +18,6 @@
     "ytdl-core": "https://github.com/fent/node-ytdl-core"
   },
   "engines": {
-    "node": "6.9.3"
+    "node": "12.14.0"
   }
 }
